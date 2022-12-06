@@ -12,3 +12,25 @@ The aim of the project is to create an application which shows the actual temper
 ## Used in the project:
 - Temperature sensor provided by AWS IoT Core (? --> @Phuc: Is this true?) 
 - Two A8-M3 cores provided by FIT IoT-LAB.
+## How to connect to Fake Broker (Setup by Prof, ssh to grenoble.iot-lab.info): 
+### Ex1:
+-- Receiver: 
+mosquitto_sub -u iotproject1 -P JointheRIOT  -h iotproject.daham.de -t chat /iotproject1/message/iotproject2
+
+-- Sender: 
+mosquitto_pub -h iotproject.dahahm.de -t test -m  "Hallo Welt" 
+
+mosquitto_pub -u iotproject2 - P JointheRIOT -h iotproject.dahahm.de -t chat /iotproject1/message/iotproject2 -m hallo 
+
+#### --> Publisher(iotproject2) sends, Subscriber receives(iotproject1)
+
+### Ex2: 
+-- Receiver: 
+mosquitto_sub -u iotproject1 -P JointheRIOT  -h iotproject.daham.de -t chat /iotproject1/message/iotproject3
+
+-- Receives all: 
+mosquitto_sub -u iotproject1 -P JointheRIOT  -h iotproject.daham.de -t chat /iotproject1/message/+
+
+-- Sender:
+mosquitto_pub -u iotproject3 - P JointheRIOT -h iotproject.dahahm.de -t chat /iotproject1/message/iotproject3 -m hallo 
+
