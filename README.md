@@ -34,3 +34,10 @@ mosquitto_sub -u iotproject1 -P JointheRIOT  -h iotproject.daham.de -t chat /iot
 -- Sender:
 mosquitto_pub -u iotproject3 - P JointheRIOT -h iotproject.dahahm.de -t chat /iotproject1/message/iotproject3 -m hallo 
 
+## Information 
+
+MQTT-Broker is created on AwS IoT Core 
+
+On the IoT-Lab Server, setup a translater (likely Mosquitto package)
+
+AwS only support encrypted MQTT TLS.

@@ -1,9 +1,9 @@
-APPLICATION = mynetworking
+APPLICATION = emcute_mqttsn
 
 BOARD ?= native
 
 # This has to be the absolute path to the RIOT base directory:
-RIOTBASE ?= /home/trnhphc/Desktop/HIS_Project/RIOT
+RIOTBASE ?= $(CURDIR)/..
 
 DEVELHELP = 1
 
