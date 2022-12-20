@@ -1,7 +1,8 @@
-/home/trnhphc/Desktop/HIS_Project/emcute_mqttsn/bin/native/application_emcute_mqttsntest/main.o: \
- /home/trnhphc/Desktop/HIS_Project/emcute_mqttsn/main.c \
+/home/trnhphc/Desktop/HIS_Project/emcute_mqttsn/bin/native/application_emcute_mqttsntest/cmd_start.o: \
+ /home/trnhphc/Desktop/HIS_Project/emcute_mqttsn/cmd_start.c \
  /usr/include/stdc-predef.h \
  /home/trnhphc/Desktop/HIS_Project/emcute_mqttsn/bin/native/riotbuild/riotbuild.h \
+ /home/trnhphc/Desktop/HIS_Project/emcute_mqttsn/cmd_start.h \
  /usr/include/stdio.h /usr/include/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/sys/cdefs.h \
  /usr/include/bits/wordsize.h /usr/include/bits/long-double.h \
@@ -32,6 +33,7 @@
  /usr/include/bits/thread-shared-types.h \
  /usr/include/bits/pthreadtypes-arch.h /usr/include/alloca.h \
  /usr/include/bits/stdlib-bsearch.h /usr/include/bits/stdlib-float.h \
+ /home/trnhphc/Desktop/HIS_Project/emcute_mqttsn/sensordefinition.h \
  /usr/include/time.h /usr/include/bits/time.h \
  /usr/include/bits/types/struct_tm.h \
  /usr/include/bits/types/struct_itimerspec.h \
@@ -89,80 +91,16 @@
  /home/trnhphc/Desktop/HIS_Project/RIOT/drivers/include/periph/gpio.h \
  /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/timex.h \
  /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/ztimer.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/shell.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/drivers/include/periph/pm.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/core/lib/include/modules.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/core/lib/include/xfa.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/emcute.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/sock/udp.h \
- /usr/include/errno.h /usr/include/bits/errno.h \
- /usr/include/linux/errno.h /usr/include/asm/errno.h \
- /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/sock.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/iolist.h \
- /usr/include/unistd.h /usr/include/bits/posix_opt.h \
- /usr/include/bits/environments.h /usr/include/bits/confname.h \
- /usr/include/bits/getopt_posix.h /usr/include/bits/getopt_core.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/net/gnrc/sock/include/sock_types.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/core/include/mbox.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/af.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/gnrc.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/netopt.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/gnrc/netapi.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/core/include/thread.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/gnrc/nettype.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/ethertype.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/protnum.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/gnrc/pkt.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/gnrc/netreg.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/gnrc/netif.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/event.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/core/lib/include/irq.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/core/include/thread_flags.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/ptrtag.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/ztimer.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/ipv6/addr.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/byteorder.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/unaligned.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/ipv4/addr.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/gnrc/netif/conf.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/dhcpv6/client.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/ieee802154.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/eui64.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/ethernet/hdr.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/gnrc/ipv6/nib/conf.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/gnrc/netif/flags.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/gnrc/netif/ipv6.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/evtimer_msg.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/evtimer.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/l2util.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/ndp.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/drivers/include/net/netdev.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/netif.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/ipv6.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/ipv6/ext.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/ipv6/ext/frag.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/ipv6/ext/rh.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/ipv6/hdr.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/inet_csum.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/gnrc/netif/hdr.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/gnrc/netif/internal.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/gnrc/pktbuf.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/gnrc/neterr.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/utlist.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/sock/ip.h \
- /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/sock/tcp.h \
- /home/trnhphc/Desktop/HIS_Project/emcute_mqttsn/sensordefinition.h \
- /home/trnhphc/Desktop/HIS_Project/emcute_mqttsn/cmd_start.h \
- /home/trnhphc/Desktop/HIS_Project/emcute_mqttsn/emcute_thread_header.h \
- /home/trnhphc/Desktop/HIS_Project/emcute_mqttsn/pub.h \
- /home/trnhphc/Desktop/HIS_Project/emcute_mqttsn/discon.h \
  /home/trnhphc/Desktop/HIS_Project/emcute_mqttsn/gen_sensors_values.h \
- /home/trnhphc/Desktop/HIS_Project/emcute_mqttsn/con.h
+ /home/trnhphc/Desktop/HIS_Project/emcute_mqttsn/con.h \
+ /home/trnhphc/Desktop/HIS_Project/emcute_mqttsn/pub.h \
+ /home/trnhphc/Desktop/HIS_Project/emcute_mqttsn/discon.h
 
 /usr/include/stdc-predef.h:
 
 /home/trnhphc/Desktop/HIS_Project/emcute_mqttsn/bin/native/riotbuild/riotbuild.h:
+
+/home/trnhphc/Desktop/HIS_Project/emcute_mqttsn/cmd_start.h:
 
 /usr/include/stdio.h:
 
@@ -271,6 +209,8 @@
 /usr/include/bits/stdlib-bsearch.h:
 
 /usr/include/bits/stdlib-float.h:
+
+/home/trnhphc/Desktop/HIS_Project/emcute_mqttsn/sensordefinition.h:
 
 /usr/include/time.h:
 
@@ -410,154 +350,10 @@
 
 /home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/ztimer.h:
 
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/shell.h:
+/home/trnhphc/Desktop/HIS_Project/emcute_mqttsn/gen_sensors_values.h:
 
-/home/trnhphc/Desktop/HIS_Project/RIOT/drivers/include/periph/pm.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/core/lib/include/modules.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/core/lib/include/xfa.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/emcute.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/sock/udp.h:
-
-/usr/include/errno.h:
-
-/usr/include/bits/errno.h:
-
-/usr/include/linux/errno.h:
-
-/usr/include/asm/errno.h:
-
-/usr/include/asm-generic/errno.h:
-
-/usr/include/asm-generic/errno-base.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/sock.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/iolist.h:
-
-/usr/include/unistd.h:
-
-/usr/include/bits/posix_opt.h:
-
-/usr/include/bits/environments.h:
-
-/usr/include/bits/confname.h:
-
-/usr/include/bits/getopt_posix.h:
-
-/usr/include/bits/getopt_core.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/net/gnrc/sock/include/sock_types.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/core/include/mbox.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/af.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/gnrc.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/netopt.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/gnrc/netapi.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/core/include/thread.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/gnrc/nettype.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/ethertype.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/protnum.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/gnrc/pkt.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/gnrc/netreg.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/gnrc/netif.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/event.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/core/lib/include/irq.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/core/include/thread_flags.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/ptrtag.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/ztimer.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/ipv6/addr.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/byteorder.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/unaligned.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/ipv4/addr.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/gnrc/netif/conf.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/dhcpv6/client.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/ieee802154.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/eui64.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/ethernet/hdr.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/gnrc/ipv6/nib/conf.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/gnrc/netif/flags.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/gnrc/netif/ipv6.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/evtimer_msg.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/evtimer.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/l2util.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/ndp.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/drivers/include/net/netdev.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/netif.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/ipv6.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/ipv6/ext.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/ipv6/ext/frag.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/ipv6/ext/rh.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/ipv6/hdr.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/inet_csum.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/gnrc/netif/hdr.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/gnrc/netif/internal.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/gnrc/pktbuf.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/gnrc/neterr.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/utlist.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/sock/ip.h:
-
-/home/trnhphc/Desktop/HIS_Project/RIOT/sys/include/net/sock/tcp.h:
-
-/home/trnhphc/Desktop/HIS_Project/emcute_mqttsn/sensordefinition.h:
-
-/home/trnhphc/Desktop/HIS_Project/emcute_mqttsn/cmd_start.h:
-
-/home/trnhphc/Desktop/HIS_Project/emcute_mqttsn/emcute_thread_header.h:
+/home/trnhphc/Desktop/HIS_Project/emcute_mqttsn/con.h:
 
 /home/trnhphc/Desktop/HIS_Project/emcute_mqttsn/pub.h:
 
 /home/trnhphc/Desktop/HIS_Project/emcute_mqttsn/discon.h:
-
-/home/trnhphc/Desktop/HIS_Project/emcute_mqttsn/gen_sensors_values.h:
-
-/home/trnhphc/Desktop/HIS_Project/emcute_mqttsn/con.h:
