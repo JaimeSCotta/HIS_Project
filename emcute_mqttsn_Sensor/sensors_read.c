@@ -22,40 +22,7 @@ static isl29020_t isl29020;
 static l3g4200d_t l3g4200d;
 
 
-static char stack[THREAD_STACKSIZE_MAIN];
-
-static void *thread_handler(void *arg){
-  (void)arg;
-  
-  while(1){
-    lsm303dlhc_3d_data_t mag_value;
-    lsm303dlhc_3d_data_t acc_value;
-
-    lsm303dlhc_read_acc(&lsm303dlhc, &acc_value);
-    printf("Accelerometer x: %i y: %i z: %i\n", 
-	    acc_value.x_axis, acc_value.y_axis, acc_value.z_axis);
- 
-    lsm303dlhc_read_mag(&lsm303dlhc, &mag_value);
-    printf("Magnetometer x: %i y: %i z: %i\n -------------------------------------\n", 
-	    mag_value.x_axis, mag_value.y_axis, mag_value.z_axis);
-
-    sensors->magnetometer_x = mag_value.x_axi;
-    sensors->magnetometer_y = mag_value.y_axis;
-    sensors->magnetometer_z = mag_value.z_axis;
-
-    sensors->acecelerometer_x = acc_value.x_axis;
-    sensors->acecelerometer_y = acc_value.y_axis;
-    sensors->acecelerometer_z = acc_value.z_axis;
-
-    xtimer_sleep(2);
-  }
-
-  return 0;
-}
-
-
-
-void sensors_read (t_sensors* sensors)){
+void sensors_read (t_sensors* sensors){
 
 /* Initialize the lps331ap semsor */
 lpsxxx_init(&lpsxxx, &lpsxxx_params[0]);
@@ -69,9 +36,6 @@ isl29020_init(&isl29020, &isl29020_params[0]);
 /* Initialize the l3g4200d sensor */
 l3g4200d_init(&l3g4200d, &l3g4200d_params[0]);
 
-
-thread_create(stack, sizeof(stack), THREAD_PRIORITY_MAIN - 1,
-		0, thread_handler, NULL, "lsm303dlhc");
 
 /* Print the values of the sensors every 2 seconds */
 while (1) {
@@ -91,6 +55,25 @@ while (1) {
   sensors->gyroscopic_x = acc_data.acc_x;
   sensors->gyroscopic_y = acc_data.acc_y;
   sensors->gyroscopic_z = acc_data.acc_z;
+  
+  lsm303dlhc_3d_data_t mag_value;
+  lsm303dlhc_3d_data_t acc_value;
+  
+  lsm303dlhc_read_acc(&lsm303dlhc, &acc_value);
+  printf("Accelerometer x: %i y: %i z: %i\n", 
+	    acc_value.x_axis, acc_value.y_axis, acc_value.z_axis);
+ 
+  lsm303dlhc_read_mag(&lsm303dlhc, &mag_value);
+  printf("Magnetometer x: %i y: %i z: %i\n -------------------------------------\n", 
+	    mag_value.x_axis, mag_value.y_axis, mag_value.z_axis);
+
+  sensors->magnetometer_x = mag_value.x_axis;
+  sensors->magnetometer_y = mag_value.y_axis;
+  sensors->magnetometer_z = mag_value.z_axis;
+
+  sensors->acecelerometer_x = acc_value.x_axis;
+  sensors->acecelerometer_y = acc_value.y_axis;
+  sensors->acecelerometer_z = acc_value.z_axis;
 
   xtimer_sleep(2);
 }

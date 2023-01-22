@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "net/emcute.h"
 #include "net/ipv6/addr.h"
 

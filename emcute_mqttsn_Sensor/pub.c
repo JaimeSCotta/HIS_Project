@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "pub.h"
 #include "net/emcute.h"
 // function that publish messages to the topic

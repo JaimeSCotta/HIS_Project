@@ -29,7 +29,7 @@ int cmd_start(int argc, char **argv){
   // sensors struct
   t_sensors sensors;
   // json that it will published
-  char json[128];
+  char json[512];
 
   while(1){
     // it tries to connect to the gateway
