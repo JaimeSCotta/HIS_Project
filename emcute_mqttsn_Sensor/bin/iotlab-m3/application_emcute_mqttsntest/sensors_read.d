@@ -53,7 +53,7 @@
  /home/jaime-iot/Desktop/HIS_Project/RIOT/core/lib/include/list.h \
  /home/jaime-iot/Desktop/HIS_Project/RIOT/core/include/thread.h \
  /home/jaime-iot/Desktop/HIS_Project/RIOT/core/lib/include/rmutex.h \
- /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/ztimer/xtimer_compat.h \
+ /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/ztimer64/xtimer_compat.h \
  /home/jaime-iot/Desktop/HIS_Project/RIOT/boards/iotlab-m3/include/board.h \
  /home/jaime-iot/Desktop/HIS_Project/RIOT/cpu/cortexm_common/include/cpu.h \
  /home/jaime-iot/Desktop/HIS_Project/RIOT/core/lib/include/irq.h \
@@ -101,6 +101,9 @@
  /home/jaime-iot/Desktop/HIS_Project/RIOT/drivers/include/periph/gpio.h \
  /home/jaime-iot/Desktop/HIS_Project/RIOT/cpu/stm32/include/periph_cpu.h \
  /home/jaime-iot/Desktop/HIS_Project/RIOT/drivers/include/mtd.h \
+ /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/div.h \
+ /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/ztimer.h \
+ /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/ztimer64.h \
  /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/ztimer.h \
  /home/jaime-iot/Desktop/HIS_Project/RIOT/drivers/include/lpsxxx.h \
  /home/jaime-iot/Desktop/HIS_Project/RIOT/drivers/include/periph/i2c.h \
@@ -182,7 +185,7 @@
 /home/jaime-iot/Desktop/HIS_Project/RIOT/core/lib/include/list.h:
 /home/jaime-iot/Desktop/HIS_Project/RIOT/core/include/thread.h:
 /home/jaime-iot/Desktop/HIS_Project/RIOT/core/lib/include/rmutex.h:
-/home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/ztimer/xtimer_compat.h:
+/home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/ztimer64/xtimer_compat.h:
 /home/jaime-iot/Desktop/HIS_Project/RIOT/boards/iotlab-m3/include/board.h:
 /home/jaime-iot/Desktop/HIS_Project/RIOT/cpu/cortexm_common/include/cpu.h:
 /home/jaime-iot/Desktop/HIS_Project/RIOT/core/lib/include/irq.h:
@@ -230,6 +233,9 @@
 /home/jaime-iot/Desktop/HIS_Project/RIOT/drivers/include/periph/gpio.h:
 /home/jaime-iot/Desktop/HIS_Project/RIOT/cpu/stm32/include/periph_cpu.h:
 /home/jaime-iot/Desktop/HIS_Project/RIOT/drivers/include/mtd.h:
+/home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/div.h:
+/home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/ztimer.h:
+/home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/ztimer64.h:
 /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/ztimer.h:
 /home/jaime-iot/Desktop/HIS_Project/RIOT/drivers/include/lpsxxx.h:
 /home/jaime-iot/Desktop/HIS_Project/RIOT/drivers/include/periph/i2c.h:

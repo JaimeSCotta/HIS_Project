@@ -57,7 +57,7 @@
  /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/xtimer.h \
  /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/timex.h \
  /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/time_units.h \
- /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/ztimer/xtimer_compat.h \
+ /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/ztimer64/xtimer_compat.h \
  /home/jaime-iot/Desktop/HIS_Project/RIOT/boards/iotlab-m3/include/board.h \
  /home/jaime-iot/Desktop/HIS_Project/RIOT/cpu/cortexm_common/include/cpu.h \
  /usr/include/newlib/stdio.h \
@@ -107,7 +107,9 @@
  /home/jaime-iot/Desktop/HIS_Project/RIOT/drivers/include/periph/gpio.h \
  /home/jaime-iot/Desktop/HIS_Project/RIOT/cpu/stm32/include/periph_cpu.h \
  /home/jaime-iot/Desktop/HIS_Project/RIOT/drivers/include/mtd.h \
- /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/ztimer.h
+ /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/div.h \
+ /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/ztimer.h \
+ /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/ztimer64.h
 /home/jaime-iot/Desktop/HIS_Project/emcute_mqttsn_Sensor/bin/iotlab-m3/riotbuild/riotbuild.h:
 /home/jaime-iot/Desktop/HIS_Project/RIOT/core/lib/include/assert.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
@@ -172,7 +174,7 @@
 /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/xtimer.h:
 /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/timex.h:
 /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/time_units.h:
-/home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/ztimer/xtimer_compat.h:
+/home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/ztimer64/xtimer_compat.h:
 /home/jaime-iot/Desktop/HIS_Project/RIOT/boards/iotlab-m3/include/board.h:
 /home/jaime-iot/Desktop/HIS_Project/RIOT/cpu/cortexm_common/include/cpu.h:
 /usr/include/newlib/stdio.h:
@@ -224,4 +226,6 @@
 /home/jaime-iot/Desktop/HIS_Project/RIOT/drivers/include/periph/gpio.h:
 /home/jaime-iot/Desktop/HIS_Project/RIOT/cpu/stm32/include/periph_cpu.h:
 /home/jaime-iot/Desktop/HIS_Project/RIOT/drivers/include/mtd.h:
+/home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/div.h:
 /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/ztimer.h:
+/home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/ztimer64.h:

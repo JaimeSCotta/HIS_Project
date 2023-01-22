@@ -55,7 +55,7 @@
  /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/time_units.h \
  /home/jaime-iot/Desktop/HIS_Project/RIOT/core/include/msg.h \
  /home/jaime-iot/Desktop/HIS_Project/RIOT/core/lib/include/rmutex.h \
- /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/ztimer/xtimer_compat.h \
+ /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/ztimer64/xtimer_compat.h \
  /home/jaime-iot/Desktop/HIS_Project/RIOT/boards/iotlab-m3/include/board.h \
  /home/jaime-iot/Desktop/HIS_Project/RIOT/cpu/cortexm_common/include/cpu.h \
  /home/jaime-iot/Desktop/HIS_Project/RIOT/core/lib/include/irq.h \
@@ -104,6 +104,9 @@
  /home/jaime-iot/Desktop/HIS_Project/RIOT/drivers/include/periph/gpio.h \
  /home/jaime-iot/Desktop/HIS_Project/RIOT/cpu/stm32/include/periph_cpu.h \
  /home/jaime-iot/Desktop/HIS_Project/RIOT/drivers/include/mtd.h \
+ /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/div.h \
+ /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/ztimer.h \
+ /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/ztimer64.h \
  /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/ztimer.h \
  /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/byteorder.h \
  /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/unaligned.h \
@@ -130,7 +133,6 @@
  /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/net/gnrc/netif.h \
  /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/event.h \
  /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/ptrtag.h \
- /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/ztimer.h \
  /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/net/ipv6/addr.h \
  /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/net/ipv4/addr.h \
  /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/net/gnrc/netif/conf.h \
@@ -228,7 +230,7 @@
 /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/time_units.h:
 /home/jaime-iot/Desktop/HIS_Project/RIOT/core/include/msg.h:
 /home/jaime-iot/Desktop/HIS_Project/RIOT/core/lib/include/rmutex.h:
-/home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/ztimer/xtimer_compat.h:
+/home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/ztimer64/xtimer_compat.h:
 /home/jaime-iot/Desktop/HIS_Project/RIOT/boards/iotlab-m3/include/board.h:
 /home/jaime-iot/Desktop/HIS_Project/RIOT/cpu/cortexm_common/include/cpu.h:
 /home/jaime-iot/Desktop/HIS_Project/RIOT/core/lib/include/irq.h:
@@ -277,6 +279,9 @@
 /home/jaime-iot/Desktop/HIS_Project/RIOT/drivers/include/periph/gpio.h:
 /home/jaime-iot/Desktop/HIS_Project/RIOT/cpu/stm32/include/periph_cpu.h:
 /home/jaime-iot/Desktop/HIS_Project/RIOT/drivers/include/mtd.h:
+/home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/div.h:
+/home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/ztimer.h:
+/home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/ztimer64.h:
 /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/ztimer.h:
 /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/byteorder.h:
 /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/unaligned.h:
@@ -306,7 +311,6 @@
 /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/net/gnrc/netif.h:
 /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/event.h:
 /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/ptrtag.h:
-/home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/ztimer.h:
 /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/net/ipv6/addr.h:
 /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/net/ipv4/addr.h:
 /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/net/gnrc/netif/conf.h:

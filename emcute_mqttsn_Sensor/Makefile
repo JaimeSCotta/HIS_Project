@@ -24,6 +24,7 @@ USEMODULE += ps
 USEMODULE += gnrc_icmpv6_echo
 # For measuring time
 USEMODULE += xtimer
+USEMODULE += libc_gettimeofday
 
 # Add the requiered module drivers for the sensors:
 USEMODULE += lps331ap
