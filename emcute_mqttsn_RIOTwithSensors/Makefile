@@ -5,7 +5,7 @@ APPLICATION = emcute_mqttsn
 BOARD ?= native
 
 # This has to be the absolute path to the RIOT base directory:
-RIOTBASE ?= $(CURDIR)/../..
+RIOTBASE ?= $(CURDIR)/../RIOT
 
 # Include packages that pull up and auto-init the link layer.
 # NOTE: 6LoWPAN will be included if IEEE802.15.4 devices are present
@@ -53,4 +53,5 @@ QUIET ?= 1
 include $(RIOTBASE)/Makefile.include
 
 # Set a custom channel if needed
+RIOTMAKE = $(CURDIR)/../RIOT/makefiles
 include $(RIOTMAKE)/default-radio-settings.inc.mk
