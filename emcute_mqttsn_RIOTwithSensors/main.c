@@ -47,7 +47,6 @@
 #define NUMOFSUBS           (16U)
 #define TOPIC_MAXLEN        (64U)
 
-static int cmd_pub(int argc, char **argv);
 
 /* Declare the devices we are using for the sensors reading values*/
 static lpsxxx_t lpsxxx;
@@ -57,6 +56,11 @@ static l3g4200d_t l3g4200d;
 
 
 static int sensors_read (int argc, char **argv){
+
+  if (argc < 2) {
+      printf("usage: %s <times you publish and measures the sensor values> <topicToPublish>\n", argv[0]);
+      return 1;
+  }
 
 /* Initialize the lps331ap semsor */
 lpsxxx_init(&lpsxxx, &lpsxxx_params[0]);
@@ -70,9 +74,14 @@ isl29020_init(&isl29020, &isl29020_params[0]);
 /* Initialize the l3g4200d sensor */
 l3g4200d_init(&l3g4200d, &l3g4200d_params[0]);
 
+/* Variables needed for the publish */
+emcute_topic_t t;
+unsigned flags = EMCUTE_QOS_0;
+t.name = argv[2];
 
 /* Print the values of the sensors every 2 seconds */
-while (1) {
+int timesReading = (int)argv[1];
+while (timesReading) {
   uint16_t pres = 0;
   int16_t temp = 0;
   l3g4200d_data_t acc_data;
@@ -95,14 +104,23 @@ while (1) {
   printf("Magnetometer x: %i y: %i z: %i\n -------------------------------------\n", 
 	    mag_value.x_axis, mag_value.y_axis, mag_value.z_axis);
 	    
-  cmd_pub(argc, argv);		    
+/* Publish the data recived from the sensors 1st attempt send only pressure values */ 
+  char aux[] = {"Pressure value 1"};
+ // aux= (char)pres;
+  if (emcute_pub(&t, aux, strlen(aux), flags) != EMCUTE_OK) {
+      printf("error: unable to publish data to topic '%s [%i]'\n",
+              t.name, (int)t.id);
+      return 1;
+  }
+
+    printf("Published %i bytes to topic '%s [%i]'\n",
+            (int)strlen(aux), t.name, t.id);
+   	    
   xtimer_sleep(2);
 }
 return 0;
 
 }
-
-
 
 
 static char stack[THREAD_STACKSIZE_DEFAULT];
