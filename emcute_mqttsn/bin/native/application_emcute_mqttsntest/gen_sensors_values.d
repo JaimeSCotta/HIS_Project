@@ -38,7 +38,13 @@
  /usr/include/bits/types/struct_tm.h \
  /usr/include/bits/types/struct_itimerspec.h \
  /home/jaime-iot/Desktop/HIS_Project/emcute_mqttsn/sensordefinition.h \
- /home/jaime-iot/Desktop/HIS_Project/emcute_mqttsn/gen_sensors_values.h
+ /home/jaime-iot/Desktop/HIS_Project/emcute_mqttsn/gen_sensors_values.h \
+ /usr/include/math.h /usr/include/bits/math-vector.h \
+ /usr/include/bits/libm-simd-decl-stubs.h \
+ /usr/include/bits/flt-eval-method.h /usr/include/bits/fp-logb.h \
+ /usr/include/bits/fp-fast.h \
+ /usr/include/bits/mathcalls-helper-functions.h \
+ /usr/include/bits/mathcalls.h
 /usr/include/stdc-predef.h:
 /home/jaime-iot/Desktop/HIS_Project/emcute_mqttsn/bin/native/riotbuild/riotbuild.h:
 /usr/include/stdio.h:
@@ -105,3 +111,11 @@
 /usr/include/bits/types/struct_itimerspec.h:
 /home/jaime-iot/Desktop/HIS_Project/emcute_mqttsn/sensordefinition.h:
 /home/jaime-iot/Desktop/HIS_Project/emcute_mqttsn/gen_sensors_values.h:
+/usr/include/math.h:
+/usr/include/bits/math-vector.h:
+/usr/include/bits/libm-simd-decl-stubs.h:
+/usr/include/bits/flt-eval-method.h:
+/usr/include/bits/fp-logb.h:
+/usr/include/bits/fp-fast.h:
+/usr/include/bits/mathcalls-helper-functions.h:
+/usr/include/bits/mathcalls.h:
