@@ -17,6 +17,8 @@
 // and the id of the specified station
 // every five seconds it generates new sensor values and publish them to 
 // sensor/station + station id
+int posRead =0;
+
 int cmd_start(int argc, char **argv){
   if (argc < 4) {
       printf("usage: %s <address> <port> <id>\n", argv[0]);
@@ -29,7 +31,7 @@ int cmd_start(int argc, char **argv){
   sprintf(topic,"sensor/station%d", atoi(argv[3]));
   
   // json that it will published
-  char json[128];
+  char json[512];
   
   while(1){
     // it tries to connect to the gateway
@@ -49,7 +51,9 @@ int cmd_start(int argc, char **argv){
     } 
 
     // updates sensor values
-    gen_sensors_values(&sensors);
+    gen_sensors_values(&sensors, posRead);
+    posRead++;
+    if(posRead==41) posRead =0;
 
     // fills the json document
     sprintf(json, "{\"id\": \"%d\", \"datetime\": \"%s\", \"temperature\": "

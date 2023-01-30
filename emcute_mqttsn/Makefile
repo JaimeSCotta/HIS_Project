@@ -39,3 +39,8 @@ QUIET ?= 1
 
 include $(RIOTBASE)/Makefile.include
 
+
+# Set a custom channel if needed
+RIOTMAKE = $(CURDIR)/../RIOT/makefiles
+include $(RIOTMAKE)/default-radio-settings.inc.mk
+
