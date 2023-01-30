@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "discon.h"
 #include "net/emcute.h"
 
