@@ -163,59 +163,111 @@ void gen_sensors_values(t_sensors* sensors, int position){
   sensors->rainHeight = arrayAux[position]-2;
 }
 
-static int sensors_read (int argc, char **argv){
+static int sensors_read(int argc, char **argv){
+    emcute_topic_t t;
+    unsigned flags = EMCUTE_QOS_0;
+    // sensors struct
+    t_sensors sensors;
 
-if (argc < 4) {
-      printf("usage: %s <address> <port> <topicPub>\n", argv[0]);
-      return 1;
-  }
-  // sensors struct
-  t_sensors sensors;
-  // name of the topic
-  char topic[32];
-  sprintf(topic,"sensor/station%d", atoi(argv[3]));
-  
-  // json that it will published
-  char json[512];
-  
-  while(1){
-    // it tries to connect to the gateway
-    if (con(argv[1], atoi(argv[2]))) {
-      continue;
+    //Predefined topic: 
+    char topic_buf[100] = "his_project/his_iot/sensor_data"
+    char* topic = (char*)&topic_buf;
+
+    if (argc < 3) {
+        printf("usage: %s <topicName> <portNumber> [topic]\n", argv[0]);
+        return 1;
     }
-    
-    // takes the current date and time
-    char datetime[20];
-    time_t current;
-    time(&current);
-    struct tm* t = localtime(&current);
-    int c = strftime(datetime, sizeof(datetime), "%Y-%m-%d %T", t);
-    if(c == 0) {
-      printf("Error! Invalid format\n");
-      return 0;
-    } 
 
-    // updates sensor values
-    gen_sensors_values(&sensors, posRead);
-    posRead++;
-    if(posRead==41) posRead =0;
+    if (argc == 4){
+        topic = argv[3];
+    }
+    //Check Gateway connection: 
+    sock_udp_ep_t gw = {.family = AF_INET6, .port=EMCUTE_PORT};
+    
+    /* Parse IPv6 Address*/
+    if (ipv6_addr_from_str((ipv6_addr_t*)&gw.addr.ipv6, argv[1]) == NULL){
+        printf("Error parsing IPv6 Address\n");
+        return 1;
+    }
 
-    // fills the json document
-    sprintf(json, "{\"topicPub\": \"%d\", \"datetime\": \"%s\", \"temperature\": "
-                  "\"%d\", \"humidity\": \"%d\", \"windDirection\": \"%d\", "
-                  "\"windIntensity\": \"%d\", \"rainHeight\": \"%d\"}",
-                  atoi(argv[3]), datetime, sensors.temperature, sensors.humidity, 
-                  sensors.windDirection, sensors.windIntensity, sensors.rainHeight);
-      
-    // publish to the topic
-    pub(topic, json, 0);
+    if (argc >= 3){
+        gw.port = atoi(argv[2]);
+    }
+
+    // json that it will published
+    char json[512];
     
-    // it disconnects from the gateway
-    discon();
-    
-    xtimer_sleep(2);
-  }	    
-return 0;
+    while(1){
+        // it tries to connect to the gateway
+        // if (con(argv[1], atoi(argv[2]))) {
+        // continue;
+        // }
+
+        // takes the current date and time
+        char datetime[20];
+        time_t current;
+        time(&current);
+        struct tm* t = localtime(&current);
+        int c = strftime(datetime, sizeof(datetime), "%Y-%m-%d %T", t);
+        if(c == 0) {
+        printf("Error! Invalid format\n");
+        return 0;
+        }
+        // Check if there is an actual connection: 
+        if(emcute_con(&gw, true, NULL, NULL, 0, 0) != EMCUTE_OK){
+            printf("error: unable to connect to [%s]:%i\n", argv[1], (int)gw.port);
+        }
+        //Connection approved
+        printf("Successfully connected to gateway at [%s]:%i\n", argv[1], (int)gw.port);
+        
+        /*Get topic ID*/
+        t.name = topic;
+        if(emcute_reg(&t) != EMCUTE_OK){
+            puts("Error: Unable to obtain topic ID");
+            return 1; 
+        }
+        // updates sensor values
+        gen_sensors_values(&sensors, posRead);
+        posRead++;
+        if(posRead==41) posRead =0;
+
+        // fills the json document
+        sprintf(json, "{\"topicPub\": \"%d\", \"datetime\": \"%s\", \"temperature\": "
+                    "\"%d\", \"humidity\": \"%d\", \"windDirection\": \"%d\", "
+                    "\"windIntensity\": \"%d\", \"rainHeight\": \"%d\"}",
+                    atoi(argv[1]), datetime, sensors.temperature, sensors.humidity, 
+                    sensors.windDirection, sensors.windIntensity, sensors.rainHeight);
+        xtimer_sleep((uint32_t) 3);
+        
+        //Try-hard: 
+        printf("Attempt to publish with tpic: %s and msg %s and flag 0x%02x\n", topic, json, (int)flags);
+
+        // // publish to the topic
+        // pub(topic, json, 0);
+        /*Step 2: Publish data*/
+        if(emcute_pub(&t, json, strlen(json), flags) != EMCUTE_OK){
+            printf("error: unable to publish data to topic ' %s [%i] '\n",
+                                                    t.name, (int)t.id);
+            return 1;
+        // }
+        // int res = emcute_discon();
+
+        // if(res == EMCUTE_NOGW){
+        //     puts("error: not connected to any broker/gateway!");
+        // }
+        
+        // else if (res != EMCUTE_OK){
+        //     puts("Error: unable to disconnect");
+        //     return 1;
+        // }
+        // puts("Disconnected successful")
+
+        // it disconnects from the gateway
+        discon();
+        
+        xtimer_sleep(2);
+    }	    
+    return 0;
 
 }
 
