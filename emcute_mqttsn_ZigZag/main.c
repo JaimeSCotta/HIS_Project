@@ -162,6 +162,8 @@ void gen_sensors_values(t_sensors* sensors, int position){
   sensors->windIntensity = arrayAux[position]+2;
   sensors->rainHeight = arrayAux[position]-2;
 }
+// json that it will published
+static char json[512];
 
 static int sensors_read(int argc, char **argv){
     emcute_topic_t t;
@@ -174,7 +176,7 @@ static int sensors_read(int argc, char **argv){
     char* topic = (char*)&topic_buf;
 
     if (argc < 3) {
-        printf("usage: %s <topicName> <portNumber> [topic]\n", argv[0]);
+        printf("usage: %s <IPv6Addr> <portNumber> [topic]\n", argv[0]);
         return 1;
     }
 
@@ -193,9 +195,6 @@ static int sensors_read(int argc, char **argv){
     if (argc >= 3){
         gw.port = atoi(argv[2]);
     }
-
-    // json that it will published
-    char json[512];
     
     while(1){
         // it tries to connect to the gateway
