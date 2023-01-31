@@ -1,4 +1,7 @@
-/*
+/* 
+ * Author: 
+ *   @ Phuc Hoc Tran - 1235133
+ *   @ Jaime Sanchez Cotta
  * Copyright (C) 2015 Freie Universität Berlin
  *
  * This file is subject to the terms and conditions of the GNU Lesser
