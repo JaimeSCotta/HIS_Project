@@ -207,8 +207,8 @@ static int sensors_read(int argc, char **argv){
         char datetime[20];
         time_t current;
         time(&current);
-        struct tm* t = localtime(&current);
-        int c = strftime(datetime, sizeof(datetime), "%Y-%m-%d %T", t);
+        struct tm* timeT = localtime(&current);
+        int c = strftime(datetime, sizeof(datetime), "%Y-%m-%d %T", timeT);
         if(c == 0) {
         printf("Error! Invalid format\n");
             return 0;
@@ -249,7 +249,7 @@ static int sensors_read(int argc, char **argv){
             printf("error: unable to publish data to topic ' %s [%i] '\n",
                                                     t.name, (int)t.id);
             return 1;
-        // }
+        }
         // int res = emcute_discon();
 
         // if(res == EMCUTE_NOGW){
@@ -263,7 +263,7 @@ static int sensors_read(int argc, char **argv){
         // puts("Disconnected successful")
 
         // it disconnects from the gateway
-        discon();
+        // discon();
         
         xtimer_sleep(2);
     }	    
