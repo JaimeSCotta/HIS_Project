@@ -16,8 +16,14 @@
 #define RIOT_MCU MCU_STM32
 #define SOCK_HAS_IPV6 1
 #define RTT_FREQUENCY RTT_MAX_FREQUENCY
+<<<<<<< HEAD
 #define CONFIG_IEEE802154_DEFAULT_CHANNEL 13
 #define RIOT_VERSION "2023.04-devel-227-gfcf63c"
+||||||| merged common ancestors
+#define RIOT_VERSION "2023.04-devel-163-g57cc6c"
+=======
+#define RIOT_VERSION "2023.04-devel-227-gfcf63c"
+>>>>>>> 274b01a0193acbfc247ca7f7215d1a9eac6571d2
 #define RIOT_VERSION_CODE RIOT_VERSION_NUM(2023,04,0,0)
 #define MODULE_AT86RF231 1
 #define MODULE_AT86RF2XX 1
