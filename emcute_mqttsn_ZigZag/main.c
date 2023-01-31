@@ -170,7 +170,7 @@ static int sensors_read(int argc, char **argv){
     t_sensors sensors;
 
     //Predefined topic: 
-    char topic_buf[100] = "his_project/his_iot/sensor_data"
+    char topic_buf[100] = "his_project/his_iot/sensor_data";
     char* topic = (char*)&topic_buf;
 
     if (argc < 3) {
@@ -211,7 +211,7 @@ static int sensors_read(int argc, char **argv){
         int c = strftime(datetime, sizeof(datetime), "%Y-%m-%d %T", t);
         if(c == 0) {
         printf("Error! Invalid format\n");
-        return 0;
+            return 0;
         }
         // Check if there is an actual connection: 
         if(emcute_con(&gw, true, NULL, NULL, 0, 0) != EMCUTE_OK){
