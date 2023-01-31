@@ -1,7 +1,7 @@
-/home/jaime-iot/Desktop/attemptsSensorsCode/emcute_mqttsn_ZigZag/bin/iotlab-a8-m3/fmt/fmt.o: \
- /home/jaime-iot/Desktop/attemptsSensorsCode/RIOT/sys/fmt/fmt.c \
- /home/jaime-iot/Desktop/attemptsSensorsCode/emcute_mqttsn_ZigZag/bin/iotlab-a8-m3/riotbuild/riotbuild.h \
- /home/jaime-iot/Desktop/attemptsSensorsCode/RIOT/core/lib/include/assert.h \
+/home/jaime-iot/Desktop/HIS_Project/emcute_mqttsn_ZigZag/bin/iotlab-a8-m3/fmt/fmt.o: \
+ /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/fmt/fmt.c \
+ /home/jaime-iot/Desktop/HIS_Project/emcute_mqttsn_ZigZag/bin/iotlab-a8-m3/riotbuild/riotbuild.h \
+ /home/jaime-iot/Desktop/HIS_Project/RIOT/core/lib/include/assert.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h \
  /usr/include/newlib/stdio.h /usr/include/newlib/_ansi.h \
@@ -18,14 +18,14 @@
  /usr/include/newlib/machine/types.h /usr/include/newlib/sys/stdio.h \
  /usr/include/newlib/string.h /usr/include/newlib/sys/string.h \
  /usr/include/newlib/unistd.h /usr/include/newlib/sys/unistd.h \
- /home/jaime-iot/Desktop/attemptsSensorsCode/RIOT/core/lib/include/kernel_defines.h \
- /home/jaime-iot/Desktop/attemptsSensorsCode/RIOT/core/lib/include/modules.h \
- /home/jaime-iot/Desktop/attemptsSensorsCode/RIOT/core/lib/include/riot_version.h \
- /home/jaime-iot/Desktop/attemptsSensorsCode/RIOT/core/lib/include/compiler_hints.h \
- /home/jaime-iot/Desktop/attemptsSensorsCode/RIOT/core/lib/include/container.h \
- /home/jaime-iot/Desktop/attemptsSensorsCode/RIOT/sys/include/fmt.h
-/home/jaime-iot/Desktop/attemptsSensorsCode/emcute_mqttsn_ZigZag/bin/iotlab-a8-m3/riotbuild/riotbuild.h:
-/home/jaime-iot/Desktop/attemptsSensorsCode/RIOT/core/lib/include/assert.h:
+ /home/jaime-iot/Desktop/HIS_Project/RIOT/core/lib/include/kernel_defines.h \
+ /home/jaime-iot/Desktop/HIS_Project/RIOT/core/lib/include/modules.h \
+ /home/jaime-iot/Desktop/HIS_Project/RIOT/core/lib/include/riot_version.h \
+ /home/jaime-iot/Desktop/HIS_Project/RIOT/core/lib/include/compiler_hints.h \
+ /home/jaime-iot/Desktop/HIS_Project/RIOT/core/lib/include/container.h \
+ /home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/fmt.h
+/home/jaime-iot/Desktop/HIS_Project/emcute_mqttsn_ZigZag/bin/iotlab-a8-m3/riotbuild/riotbuild.h:
+/home/jaime-iot/Desktop/HIS_Project/RIOT/core/lib/include/assert.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h:
 /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h:
 /usr/include/newlib/stdio.h:
@@ -52,9 +52,9 @@
 /usr/include/newlib/sys/string.h:
 /usr/include/newlib/unistd.h:
 /usr/include/newlib/sys/unistd.h:
-/home/jaime-iot/Desktop/attemptsSensorsCode/RIOT/core/lib/include/kernel_defines.h:
-/home/jaime-iot/Desktop/attemptsSensorsCode/RIOT/core/lib/include/modules.h:
-/home/jaime-iot/Desktop/attemptsSensorsCode/RIOT/core/lib/include/riot_version.h:
-/home/jaime-iot/Desktop/attemptsSensorsCode/RIOT/core/lib/include/compiler_hints.h:
-/home/jaime-iot/Desktop/attemptsSensorsCode/RIOT/core/lib/include/container.h:
-/home/jaime-iot/Desktop/attemptsSensorsCode/RIOT/sys/include/fmt.h:
+/home/jaime-iot/Desktop/HIS_Project/RIOT/core/lib/include/kernel_defines.h:
+/home/jaime-iot/Desktop/HIS_Project/RIOT/core/lib/include/modules.h:
+/home/jaime-iot/Desktop/HIS_Project/RIOT/core/lib/include/riot_version.h:
+/home/jaime-iot/Desktop/HIS_Project/RIOT/core/lib/include/compiler_hints.h:
+/home/jaime-iot/Desktop/HIS_Project/RIOT/core/lib/include/container.h:
+/home/jaime-iot/Desktop/HIS_Project/RIOT/sys/include/fmt.h:
