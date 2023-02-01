@@ -1,7 +1,9 @@
 # HIS_Project
 High integrity Sistems Project. Frankfurt University of Applied Sciences.
 
-Authors: Phuc Hoc Tran and Jaime Sanchez Cotta.
+Co-authors: 
+- Phuc Hoc Tran - 1235133 
+- Jaime Sanchez Cotta - 1430488
 
 This Markdown is written by Phuc Hoc Tran (1235133)
 
