@@ -72,7 +72,7 @@ typedef struct sensors{
   int rainHeight;
 }t_sensors;
 
-/* function to publish Zig Zag values */
+/* function to create Zig Zag pattern */
 int posRead =0;
 int vMax = 20;
 int arrayAux[41];
@@ -92,7 +92,7 @@ int zigZag_val(int x){
   }
   else return 0;
 }
-
+//generate Zig Zag pattern
 void gen_sensors_values(t_sensors* sensors, int position){
   int x;
   int i = 0;
@@ -110,7 +110,7 @@ void gen_sensors_values(t_sensors* sensors, int position){
   sensors->rainHeight = arrayAux[position]-2;
 }
 
-// json that it will published
+// json to be published
 static char json[512];
 
 static int sensors_read(int argc, char **argv){
