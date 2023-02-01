@@ -181,12 +181,12 @@ static int sensors_read(int argc, char **argv){
         sprintf(json, "{\"topicPub\": \"%s\", \"datetime\": \"%s\", \"temperature\": "
                     "\"%d\", \"humidity\": \"%d\", \"windDirection\": \"%d\", "
                     "\"windIntensity\": \"%d\", \"rainHeight\": \"%d\"}",
-                    argv[1], datetime, sensors.temperature, sensors.humidity, 
+                    t.name, datetime, sensors.temperature, sensors.humidity, 
                     sensors.windDirection, sensors.windIntensity, sensors.rainHeight);
         xtimer_sleep((uint32_t) 3);
         
         //Try-hard: 
-        printf("Attempt to publish topic: %s and msg:\n %s \n with flag 0x%02x\n", argv[1], json, (int)flags);
+        printf("Attempt to publish topic: %s and msg:\n %s \n with flag 0x%02x\n", t.name, json, (int)flags);
 
         /*Step 2: Publish data*/
         if(emcute_pub(&t, json, strlen(json), flags) != EMCUTE_OK){
