@@ -150,8 +150,8 @@ static int sensors_read(int argc, char **argv){
     while(1){
         // takes the current date and time
         char datetime[20];
-        time_t current;
-        time(&current);
+        time_t current = time(0);
+        // time(&current);
         struct tm* timeT = localtime(&current);
         int c = strftime(datetime, sizeof(datetime), "%Y-%m-%d %T", timeT);
         if(c == 0) {
@@ -183,7 +183,7 @@ static int sensors_read(int argc, char **argv){
                     "\"windIntensity\": \"%d\", \"rainHeight\": \"%d\"}",
                     t.name, datetime, sensors.temperature, sensors.humidity, 
                     sensors.windDirection, sensors.windIntensity, sensors.rainHeight);
-        xtimer_sleep((uint32_t) 3);
+        // xtimer_sleep((uint32_t) 3);
         
         //Try-hard: 
         printf("Attempt to publish topic: %s and msg:\n %s \n with flag 0x%02x\n", t.name, json, (int)flags);
