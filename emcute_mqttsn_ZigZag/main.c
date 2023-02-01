@@ -195,6 +195,12 @@ static int sensors_read(int argc, char **argv){
     if (argc >= 3){
         gw.port = atoi(argv[2]);
     }
+    // Check if there is an actual connection: 
+    if(emcute_con(&gw, true, NULL, NULL, 0, 0) != EMCUTE_OK){
+        printf("error: unable to connect to [%s]:%i\n", argv[1], (int)gw.port);
+    }
+    //Connection approved
+    printf("Successfully connected to gateway at [%s]:%i\n", argv[1], (int)gw.port);
     
     while(1){
         // it tries to connect to the gateway
@@ -212,12 +218,6 @@ static int sensors_read(int argc, char **argv){
         printf("Error! Invalid format\n");
             return 0;
         }
-        // Check if there is an actual connection: 
-        if(emcute_con(&gw, true, NULL, NULL, 0, 0) != EMCUTE_OK){
-            printf("error: unable to connect to [%s]:%i\n", argv[1], (int)gw.port);
-        }
-        //Connection approved
-        printf("Successfully connected to gateway at [%s]:%i\n", argv[1], (int)gw.port);
         
         /*Get topic ID*/
         t.name = topic;
@@ -489,7 +489,7 @@ static const shell_command_t shell_commands[] = {
     { "sub", "subscribe topic", cmd_sub },
     { "unsub", "unsubscribe from topic", cmd_unsub },
     { "will", "register a last will", cmd_will },
-    { "getSensorData", "Returns the sensor values of temperature, pressure, light, gyroscopic, acelerometer and magnetometer", sensors_read},
+    { "pub_sensor", "Returns the sensor values of temperature, pressure, light, gyroscopic, acelerometer and magnetometer", sensors_read},
     { NULL, NULL, NULL }
 };
 
