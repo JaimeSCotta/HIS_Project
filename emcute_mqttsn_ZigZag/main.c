@@ -152,10 +152,10 @@ static int sensors_read(int argc, char **argv){
         char datetime[20];
         time_t now = time(&now);
         // time(&current);
-        struct tm* timeT = gmtime(&now);
+        struct tm* timeT = localtime(&now);
         int c = strftime(datetime, sizeof(datetime), "%Y-%m-%d %T", timeT);
         if(c == 0) {
-        printf("Error! Invalid format\n");
+            printf("Error! Invalid format\n");
             return 0;
         }
         
