@@ -181,12 +181,12 @@ static int sensors_read(int argc, char **argv){
         sprintf(json, "{\"topicPub\": \"%d\", \"datetime\": \"%s\", \"temperature\": "
                     "\"%d\", \"humidity\": \"%d\", \"windDirection\": \"%d\", "
                     "\"windIntensity\": \"%d\", \"rainHeight\": \"%d\"}",
-                    atoi(argv[1]), datetime, sensors.temperature, sensors.humidity, 
+                    argv[1], datetime, sensors.temperature, sensors.humidity, 
                     sensors.windDirection, sensors.windIntensity, sensors.rainHeight);
         xtimer_sleep((uint32_t) 3);
         
         //Try-hard: 
-        printf("Attempt to publish topic: %d and msg:\n %s \n with flag 0x%02x\n", atoi(argv[1]), json, (int)flags);
+        printf("Attempt to publish topic: %d and msg:\n %s \n with flag 0x%02x\n", argv[1], json, (int)flags);
 
         /*Step 2: Publish data*/
         if(emcute_pub(&t, json, strlen(json), flags) != EMCUTE_OK){
@@ -204,7 +204,8 @@ static int sensors_read(int argc, char **argv){
 }
 /*-----END CUSTOM FUNCTION:-----*/
 
-//LEGACY CODE:
+/*----LEGACY CODE:----*/
+
 static char stack[THREAD_STACKSIZE_DEFAULT];
 static msg_t queue[8];
 
