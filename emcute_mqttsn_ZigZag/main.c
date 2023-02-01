@@ -1,12 +1,13 @@
 /* 
- * Author: 
+ * Co-author: 
  *   @ Phuc Hoc Tran - 1235133
- *   @ Jaime Sanchez Cotta
+ *   @ Jaime Sanchez Cotta - 1430488
  * Copyright (C) 2015 Freie Universität Berlin
  *
  * This file is subject to the terms and conditions of the GNU Lesser
  * General Public License v2.1. See the file LICENSE in the top level
  * directory for more details.
+ * make command: make ETHOS_BAUDRATE=500000 DEFAULT_CHANNEL=13 BOARD=iotlab-a8-m3 clean all
  */
 
 /**
@@ -44,72 +45,8 @@
 #define EMCUTE_PORT (1883U)
 #define EMCUTE_PRIO (THREAD_PRIORITY_MAIN - 1)
 
-
-// struct that contains sensors
-typedef struct sensors{
-  int temperature;
-  int humidity;
-  int windDirection;
-  int windIntensity;
-  int rainHeight;
-}t_sensors;
-
-/* function to publish Zig Zag values */
-int pub(char* topic, char* data, int qos){
-  emcute_topic_t t;
-  unsigned flags = EMCUTE_QOS_0;
-
-  switch (qos) {
-      case 1:
-        flags |= EMCUTE_QOS_1;
-        break;
-      case 2:
-        flags |= EMCUTE_QOS_2;
-        break;
-      default:
-        flags |= EMCUTE_QOS_0;
-        break;
-  }
-
-
-
-  /* step 1: get topic id */
-  t.name = topic;
-  if (emcute_reg(&t) != EMCUTE_OK) {
-      puts("error: unable to obtain topic ID");
-      return 1;
-  }
-
-  /* step 2: publish data */
-  if (emcute_pub(&t, data, strlen(data), flags) != EMCUTE_OK) {
-      printf("error: unable to publish data to topic '%s [%i]'\n",
-              t.name, (int)t.id);
-      return 1;
-  }
-
-  printf("published %s on topic %s\n", data, topic);
-
-  return 0;
-}
-
-/* Function to connect to the gateway used in the function ZigZag values */
-int con(char* addr, int port){
-  sock_udp_ep_t gw = { .family = AF_INET6, .port = EMCUTE_PORT };
-  gw.port = port;
-
-  /* parse address */
-  if (ipv6_addr_from_str((ipv6_addr_t *)&gw.addr.ipv6, addr) == NULL) {
-      printf("error parsing IPv6 address\n");
-      return 1;
-  }
-
-  if (emcute_con(&gw, true, NULL, NULL, 0, 0) != EMCUTE_OK) {
-      printf("error: unable to connect to [%s]:%i\n", addr, port);
-      return 1;
-  }
-  printf("Successfully connected to gateway at [%s]:%i\n", addr, port);
-  return 0;
-}
+/*-----CUSTOM FUNCTION:-----*/
+/*-----START:-----*/
 
 // function that disconnects from the mqttsn gateway
 int discon(void){
@@ -126,6 +63,16 @@ int discon(void){
     return 0;
 }
 
+// struct that contains sensors
+typedef struct sensors{
+  int temperature;
+  int humidity;
+  int windDirection;
+  int windIntensity;
+  int rainHeight;
+}t_sensors;
+
+/* function to publish Zig Zag values */
 int posRead =0;
 int vMax = 20;
 int arrayAux[41];
@@ -163,62 +110,101 @@ void gen_sensors_values(t_sensors* sensors, int position){
   sensors->rainHeight = arrayAux[position]-2;
 }
 
-static int sensors_read (int argc, char **argv){
+// json that it will published
+static char json[512];
 
-if (argc < 4) {
-      printf("usage: %s <address> <port> <topicPub>\n", argv[0]);
-      return 1;
-  }
-  // sensors struct
-  t_sensors sensors;
-  // name of the topic
-  char topic[32];
-  sprintf(topic,"sensor/station%d", atoi(argv[3]));
-  
-  // json that it will published
-  char json[512];
-  
-  while(1){
-    // it tries to connect to the gateway
-    if (con(argv[1], atoi(argv[2]))) {
-      continue;
+static int sensors_read(int argc, char **argv){
+    emcute_topic_t t;
+    unsigned flags = EMCUTE_QOS_0;
+    // sensors struct
+    t_sensors sensors;
+
+    //Predefined topic: 
+    char topic_buf[100] = "his_project/his_iot/sensor_data";
+    char* topic = (char*)&topic_buf;
+ 
+    //How to use the function:
+    if (argc < 3) {
+        printf("usage: %s <IPv6Addr> <portNumber> [topic]\n", argv[0]);
+        return 1;
+    }
+
+    //If other topic is specified, then use that topic:
+    if (argc == 4){
+        topic = argv[3];
+    }
+    //Check Gateway connection: 
+    sock_udp_ep_t gw = {.family = AF_INET6, .port=EMCUTE_PORT};
+    
+    /* Parse IPv6 Address*/
+    if (ipv6_addr_from_str((ipv6_addr_t*)&gw.addr.ipv6, argv[1]) == NULL){
+        printf("Error parsing IPv6 Address\n");
+        return 1;
+    }
+
+    //Port specify: 
+    if (argc >= 3){
+        gw.port = atoi(argv[2]);
     }
     
-    // takes the current date and time
-    char datetime[20];
-    time_t current;
-    time(&current);
-    struct tm* t = localtime(&current);
-    int c = strftime(datetime, sizeof(datetime), "%Y-%m-%d %T", t);
-    if(c == 0) {
-      printf("Error! Invalid format\n");
-      return 0;
-    } 
+    while(1){
+        // takes the current date and time
+        char datetime[20];
+        time_t current;
+        time(&current);
+        struct tm* timeT = localtime(&current);
+        int c = strftime(datetime, sizeof(datetime), "%Y-%m-%d %T", timeT);
+        if(c == 0) {
+        printf("Error! Invalid format\n");
+            return 0;
+        }
+        
+        // Establish the connection: 
+        if(emcute_con(&gw, true, NULL, NULL, 0, 0) != EMCUTE_OK){
+            printf("error: unable to connect to [%s]:%i\n", argv[1], (int)gw.port);
+        }
+        //Connection approved
+        printf("Successfully connected to gateway at [%s]:%i\n", argv[1], (int)gw.port);
+        
+        /*Get topic ID*/
+        t.name = topic;
+        if(emcute_reg(&t) != EMCUTE_OK){
+            puts("Error: Unable to obtain topic ID");
+            return 1; 
+        }
+        // updates sensor values
+        gen_sensors_values(&sensors, posRead);
+        posRead++;
+        if(posRead==41) posRead =0;
 
-    // updates sensor values
-    gen_sensors_values(&sensors, posRead);
-    posRead++;
-    if(posRead==41) posRead =0;
+        // fills the json document
+        sprintf(json, "{\"topicPub\": \"%s\", \"datetime\": \"%s\", \"temperature\": "
+                    "\"%d\", \"humidity\": \"%d\", \"windDirection\": \"%d\", "
+                    "\"windIntensity\": \"%d\", \"rainHeight\": \"%d\"}",
+                    t.name, datetime, sensors.temperature, sensors.humidity, 
+                    sensors.windDirection, sensors.windIntensity, sensors.rainHeight);
+        xtimer_sleep((uint32_t) 3);
+        
+        //Try-hard: 
+        printf("Attempt to publish topic: %s and msg:\n %s \n with flag 0x%02x\n", t.name, json, (int)flags);
 
-    // fills the json document
-    sprintf(json, "{\"topicPub\": \"%d\", \"datetime\": \"%s\", \"temperature\": "
-                  "\"%d\", \"humidity\": \"%d\", \"windDirection\": \"%d\", "
-                  "\"windIntensity\": \"%d\", \"rainHeight\": \"%d\"}",
-                  atoi(argv[3]), datetime, sensors.temperature, sensors.humidity, 
-                  sensors.windDirection, sensors.windIntensity, sensors.rainHeight);
-      
-    // publish to the topic
-    pub(topic, json, 0);
-    
-    // it disconnects from the gateway
-    discon();
-    
-    xtimer_sleep(2);
-  }	    
-return 0;
+        /*Step 2: Publish data*/
+        if(emcute_pub(&t, json, strlen(json), flags) != EMCUTE_OK){
+            printf("error: unable to publish data to topic ' %s [%i] '\n",
+                                                    t.name, (int)t.id);
+            return 1;
+        }
 
+        // it disconnects from the gateway
+        discon();
+        
+        xtimer_sleep(2);
+    }	    
+    return 0;
 }
+/*-----END CUSTOM FUNCTION:-----*/
 
+/*----LEGACY CODE:----*/
 
 static char stack[THREAD_STACKSIZE_DEFAULT];
 static msg_t queue[8];
@@ -432,21 +418,22 @@ static int cmd_will(int argc, char **argv)
 }
 
 static const shell_command_t shell_commands[] = {
+    { "pub_sensor", "Connects to the gateway automatically with explicitly define IPv6 address and publishes the sensor values", sensors_read}, //add by co-author
     { "con", "connect to MQTT broker", cmd_con },
     { "discon", "disconnect from the current broker", cmd_discon },
     { "pub", "publish something", cmd_pub },
     { "sub", "subscribe topic", cmd_sub },
     { "unsub", "unsubscribe from topic", cmd_unsub },
     { "will", "register a last will", cmd_will },
-    { "getSensorData", "Returns the sensor values of temperature, pressure, light, gyroscopic, acelerometer and magnetometer", sensors_read},
     { NULL, NULL, NULL }
 };
 
 int main(void)
 {
-    puts("MQTT-SN example application\n");
+    puts("MQTT-SN Client application\n");
     puts("Type 'help' to get started. Have a look at the README.md for more"
          "information.");
+    puts("Co-authors: Phuc Tran and Jaime");
 
     /* the main thread needs a msg queue to be able to run `ping`*/
     msg_init_queue(queue, ARRAY_SIZE(queue));

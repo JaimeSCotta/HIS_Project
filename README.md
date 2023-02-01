@@ -1,7 +1,12 @@
 # HIS_Project
 High integrity Sistems Project. Frankfurt University of Applied Sciences.
-Authors: Phuc Hoc Tran and Jaime Sanchez Cotta.
+
+Co-authors: 
+- Phuc Hoc Tran - 1235133 
+- Jaime Sanchez Cotta - 1430488
+
 This Markdown is written by Phuc Hoc Tran (1235133)
+
 The aim of the project is to create an application which shows the actual temperature.
 ## Prerequisites: 
 - A registered account on FiT IoT-Lab
@@ -25,3 +30,9 @@ ___
     * Border Router.
 
 ### 2. In details:
+
+## Sensors: 
+## EC2 Instance && AwS IoT Core Setup: 
+## MQTT-SN Gateway Setup:
+## DynamoDB
+## Python Flask/Django Webpage: 
