@@ -1,5 +1,5 @@
 /* 
- * Author: 
+ * Co-author: 
  *   @ Phuc Hoc Tran - 1235133
  *   @ Jaime Sanchez Cotta - 
  * Copyright (C) 2015 Freie Universität Berlin
@@ -45,72 +45,8 @@
 #define EMCUTE_PORT (1883U)
 #define EMCUTE_PRIO (THREAD_PRIORITY_MAIN - 1)
 
-
-// struct that contains sensors
-typedef struct sensors{
-  int temperature;
-  int humidity;
-  int windDirection;
-  int windIntensity;
-  int rainHeight;
-}t_sensors;
-
-/* function to publish Zig Zag values */
-int pub(char* topic, char* data, int qos){
-  emcute_topic_t t;
-  unsigned flags = EMCUTE_QOS_0;
-
-  switch (qos) {
-      case 1:
-        flags |= EMCUTE_QOS_1;
-        break;
-      case 2:
-        flags |= EMCUTE_QOS_2;
-        break;
-      default:
-        flags |= EMCUTE_QOS_0;
-        break;
-  }
-
-
-
-  /* step 1: get topic id */
-  t.name = topic;
-  if (emcute_reg(&t) != EMCUTE_OK) {
-      puts("error: unable to obtain topic ID");
-      return 1;
-  }
-
-  /* step 2: publish data */
-  if (emcute_pub(&t, data, strlen(data), flags) != EMCUTE_OK) {
-      printf("error: unable to publish data to topic '%s [%i]'\n",
-              t.name, (int)t.id);
-      return 1;
-  }
-
-  printf("published %s on topic %s\n", data, topic);
-
-  return 0;
-}
-
-/* Function to connect to the gateway used in the function ZigZag values */
-int con(char* addr, int port){
-  sock_udp_ep_t gw = { .family = AF_INET6, .port = EMCUTE_PORT };
-  gw.port = port;
-
-  /* parse address */
-  if (ipv6_addr_from_str((ipv6_addr_t *)&gw.addr.ipv6, addr) == NULL) {
-      printf("error parsing IPv6 address\n");
-      return 1;
-  }
-
-  if (emcute_con(&gw, true, NULL, NULL, 0, 0) != EMCUTE_OK) {
-      printf("error: unable to connect to [%s]:%i\n", addr, port);
-      return 1;
-  }
-  printf("Successfully connected to gateway at [%s]:%i\n", addr, port);
-  return 0;
-}
+/*-----CUSTOM FUNCTION:-----*/
+/*-----START:-----*/
 
 // function that disconnects from the mqttsn gateway
 int discon(void){
@@ -127,6 +63,16 @@ int discon(void){
     return 0;
 }
 
+// struct that contains sensors
+typedef struct sensors{
+  int temperature;
+  int humidity;
+  int windDirection;
+  int windIntensity;
+  int rainHeight;
+}t_sensors;
+
+/* function to publish Zig Zag values */
 int posRead =0;
 int vMax = 20;
 int arrayAux[41];
@@ -163,8 +109,6 @@ void gen_sensors_values(t_sensors* sensors, int position){
   sensors->windIntensity = arrayAux[position]+2;
   sensors->rainHeight = arrayAux[position]-2;
 }
-
-/*-----CUSTOM FUNCTION:-----*/
 
 // json that it will published
 static char json[512];
@@ -260,8 +204,7 @@ static int sensors_read(int argc, char **argv){
 }
 /*-----END CUSTOM FUNCTION:-----*/
 
-
-
+//LEGACY CODE:
 static char stack[THREAD_STACKSIZE_DEFAULT];
 static msg_t queue[8];
 
@@ -474,7 +417,7 @@ static int cmd_will(int argc, char **argv)
 }
 
 static const shell_command_t shell_commands[] = {
-    { "pub_sensor", "Connects to the gateway automatically with explicitly define IPv6 address and publishes the sensor values", sensors_read},
+    { "pub_sensor", "Connects to the gateway automatically with explicitly define IPv6 address and publishes the sensor values", sensors_read}, //add by co-author
     { "con", "connect to MQTT broker", cmd_con },
     { "discon", "disconnect from the current broker", cmd_discon },
     { "pub", "publish something", cmd_pub },
