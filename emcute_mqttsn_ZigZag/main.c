@@ -147,17 +147,18 @@ static int sensors_read(int argc, char **argv){
         gw.port = atoi(argv[2]);
     }
     
+    // takes the current date and time
+    char datetime[20];
+    time_t now = time(&now);
+    // time(&current);
+    struct tm* timeT = localtime(&now);
+    int c = strftime(datetime, sizeof(datetime), "%Y-%m-%d %T", timeT);
+    if(c == 0) {
+        printf("Error! Invalid format\n");
+        return 0;
+    }
+    
     while(1){
-        // takes the current date and time
-        char datetime[20];
-        time_t now = time(&now);
-        // time(&current);
-        struct tm* timeT = localtime(&now);
-        int c = strftime(datetime, sizeof(datetime), "%Y-%m-%d %T", timeT);
-        if(c == 0) {
-            printf("Error! Invalid format\n");
-            return 0;
-        }
         
         // Establish the connection: 
         if(emcute_con(&gw, true, NULL, NULL, 0, 0) != EMCUTE_OK){
