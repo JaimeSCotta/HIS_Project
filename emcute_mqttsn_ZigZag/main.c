@@ -1,12 +1,13 @@
 /* 
  * Author: 
  *   @ Phuc Hoc Tran - 1235133
- *   @ Jaime Sanchez Cotta
+ *   @ Jaime Sanchez Cotta - 
  * Copyright (C) 2015 Freie Universität Berlin
  *
  * This file is subject to the terms and conditions of the GNU Lesser
  * General Public License v2.1. See the file LICENSE in the top level
  * directory for more details.
+ * make command: make ETHOS_BAUDRATE=500000 DEFAULT_CHANNEL=13 BOARD=iotlab-a8-m3 clean all
  */
 
 /**
@@ -174,12 +175,14 @@ static int sensors_read(int argc, char **argv){
     //Predefined topic: 
     char topic_buf[100] = "his_project/his_iot/sensor_data";
     char* topic = (char*)&topic_buf;
-
+ 
+    //How to use the function:
     if (argc < 3) {
         printf("usage: %s <IPv6Addr> <portNumber> [topic]\n", argv[0]);
         return 1;
     }
 
+    //If other topic is specified, then use that topic:
     if (argc == 4){
         topic = argv[3];
     }
@@ -192,22 +195,12 @@ static int sensors_read(int argc, char **argv){
         return 1;
     }
 
+    //Port specify: 
     if (argc >= 3){
         gw.port = atoi(argv[2]);
     }
-    // Check if there is an actual connection: 
-    if(emcute_con(&gw, true, NULL, NULL, 0, 0) != EMCUTE_OK){
-        printf("error: unable to connect to [%s]:%i\n", argv[1], (int)gw.port);
-    }
-    //Connection approved
-    printf("Successfully connected to gateway at [%s]:%i\n", argv[1], (int)gw.port);
     
     while(1){
-        // it tries to connect to the gateway
-        // if (con(argv[1], atoi(argv[2]))) {
-        // continue;
-        // }
-
         // takes the current date and time
         char datetime[20];
         time_t current;
@@ -218,6 +211,13 @@ static int sensors_read(int argc, char **argv){
         printf("Error! Invalid format\n");
             return 0;
         }
+        
+        // Establish the connection: 
+        if(emcute_con(&gw, true, NULL, NULL, 0, 0) != EMCUTE_OK){
+            printf("error: unable to connect to [%s]:%i\n", argv[1], (int)gw.port);
+        }
+        //Connection approved
+        printf("Successfully connected to gateway at [%s]:%i\n", argv[1], (int)gw.port);
         
         /*Get topic ID*/
         t.name = topic;
@@ -239,30 +239,17 @@ static int sensors_read(int argc, char **argv){
         xtimer_sleep((uint32_t) 3);
         
         //Try-hard: 
-        printf("Attempt to publish with tpic: %s and msg %s and flag 0x%02x\n", topic, json, (int)flags);
+        printf("Attempt to publish topic: %d and msg:\n %s \n with flag 0x%02x\n", atoi([argv[1]]), json, (int)flags);
 
-        // // publish to the topic
-        // pub(topic, json, 0);
         /*Step 2: Publish data*/
         if(emcute_pub(&t, json, strlen(json), flags) != EMCUTE_OK){
             printf("error: unable to publish data to topic ' %s [%i] '\n",
                                                     t.name, (int)t.id);
             return 1;
         }
-        // int res = emcute_discon();
-
-        // if(res == EMCUTE_NOGW){
-        //     puts("error: not connected to any broker/gateway!");
-        // }
-        
-        // else if (res != EMCUTE_OK){
-        //     puts("Error: unable to disconnect");
-        //     return 1;
-        // }
-        // puts("Disconnected successful")
 
         // it disconnects from the gateway
-        // discon();
+        discon();
         
         xtimer_sleep(2);
     }	    
@@ -489,15 +476,16 @@ static const shell_command_t shell_commands[] = {
     { "sub", "subscribe topic", cmd_sub },
     { "unsub", "unsubscribe from topic", cmd_unsub },
     { "will", "register a last will", cmd_will },
-    { "pub_sensor", "Returns the sensor values of temperature, pressure, light, gyroscopic, acelerometer and magnetometer", sensors_read},
+    { "pub_sensor", "Connects to the gateway automatically and publishes the sensor values", sensors_read},
     { NULL, NULL, NULL }
 };
 
 int main(void)
 {
-    puts("MQTT-SN example application\n");
+    puts("MQTT-SN Client application\n");
     puts("Type 'help' to get started. Have a look at the README.md for more"
          "information.");
+    puts("Co-authors: Phuc Tran and Jaime")
 
     /* the main thread needs a msg queue to be able to run `ping`*/
     msg_init_queue(queue, ARRAY_SIZE(queue));
