@@ -242,7 +242,7 @@ static int sensors_read(int argc, char **argv){
         xtimer_sleep((uint32_t) 3);
         
         //Try-hard: 
-        printf("Attempt to publish topic: %d and msg:\n %s \n with flag 0x%02x\n", atoi([argv[1]]), json, (int)flags);
+        printf("Attempt to publish topic: %d and msg:\n %s \n with flag 0x%02x\n", atoi(argv[1]), json, (int)flags);
 
         /*Step 2: Publish data*/
         if(emcute_pub(&t, json, strlen(json), flags) != EMCUTE_OK){
@@ -489,7 +489,7 @@ int main(void)
     puts("MQTT-SN Client application\n");
     puts("Type 'help' to get started. Have a look at the README.md for more"
          "information.");
-    puts("Co-authors: Phuc Tran and Jaime")
+    puts("Co-authors: Phuc Tran and Jaime");
 
     /* the main thread needs a msg queue to be able to run `ping`*/
     msg_init_queue(queue, ARRAY_SIZE(queue));
