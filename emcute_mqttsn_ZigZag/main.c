@@ -1,7 +1,7 @@
 /* 
  * Co-author: 
  *   @ Phuc Hoc Tran - 1235133
- *   @ Jaime Sanchez Cotta - 
+ *   @ Jaime Sanchez Cotta - 1430488
  * Copyright (C) 2015 Freie Universität Berlin
  *
  * This file is subject to the terms and conditions of the GNU Lesser
