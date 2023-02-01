@@ -163,6 +163,9 @@ void gen_sensors_values(t_sensors* sensors, int position){
   sensors->windIntensity = arrayAux[position]+2;
   sensors->rainHeight = arrayAux[position]-2;
 }
+
+/*-----CUSTOM FUNCTION:-----*/
+
 // json that it will published
 static char json[512];
 
@@ -254,8 +257,9 @@ static int sensors_read(int argc, char **argv){
         xtimer_sleep(2);
     }	    
     return 0;
-
 }
+/*-----END CUSTOM FUNCTION:-----*/
+
 
 
 static char stack[THREAD_STACKSIZE_DEFAULT];
@@ -470,13 +474,13 @@ static int cmd_will(int argc, char **argv)
 }
 
 static const shell_command_t shell_commands[] = {
+    { "pub_sensor", "Connects to the gateway automatically with explicitly define IPv6 address and publishes the sensor values", sensors_read},
     { "con", "connect to MQTT broker", cmd_con },
     { "discon", "disconnect from the current broker", cmd_discon },
     { "pub", "publish something", cmd_pub },
     { "sub", "subscribe topic", cmd_sub },
     { "unsub", "unsubscribe from topic", cmd_unsub },
     { "will", "register a last will", cmd_will },
-    { "pub_sensor", "Connects to the gateway automatically and publishes the sensor values", sensors_read},
     { NULL, NULL, NULL }
 };
 
