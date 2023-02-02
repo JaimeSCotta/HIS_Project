@@ -1,5 +1,5 @@
 # HIS_Project
-High integrity Sistems Project. Frankfurt University of Applied Sciences.
+High integrity Sistems' Project. Frankfurt University of Applied Sciences.
 
 Co-authors: 
 - Phuc Hoc Tran - 1235133 
