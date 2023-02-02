@@ -148,16 +148,16 @@ static int sensors_read(int argc, char **argv){
     }
     
     while(1){
-        // takes the current date and time
-        char datetime[20];
-        time_t now;
-        time(&now);
-        struct tm* timeinfo = localtime(&now);
-        int c = strftime(datetime, sizeof(datetime), "%Y-%m-%d %T", timeinfo);
-        if(c == 0) {
-            printf("Error! Invalid format\n");
-            return 0;
-        }
+        // takes the current date and time -- TEMPORARY REMOVED
+        // char datetime[20];
+        // time_t now;
+        // time(&now);
+        // struct tm* timeinfo = localtime(&now);
+        // int c = strftime(datetime, sizeof(datetime), "%Y-%m-%d %T", timeinfo);
+        // if(c == 0) {
+        //     printf("Error! Invalid format\n");
+        //     return 0;
+        // }
         
         // Establish the connection: 
         if(emcute_con(&gw, true, NULL, NULL, 0, 0) != EMCUTE_OK){
@@ -178,10 +178,18 @@ static int sensors_read(int argc, char **argv){
         if(posRead==41) posRead =0;
 
         // fills the json document
-        sprintf(json, "{\"topicPub\": \"%s\", \"datetime\": \"%s\", \"temperature\": "
+        //old:
+        // sprintf(json, "{\"topicPub\": \"%s\", \"datetime\": \"%s\", \"temperature\": "
+        //             "\"%d\", \"humidity\": \"%d\", \"windDirection\": \"%d\", "
+        //             "\"windIntensity\": \"%d\", \"rainHeight\": \"%d\"}",
+        //             t.name, datetime, sensors.temperature, sensors.humidity, 
+        //             sensors.windDirection, sensors.windIntensity, sensors.rainHeight);
+
+        //new: -- REMOVED DATETIME
+        sprintf(json, "{\"topicPub\": \"%s\", \"temperature\": "
                     "\"%d\", \"humidity\": \"%d\", \"windDirection\": \"%d\", "
                     "\"windIntensity\": \"%d\", \"rainHeight\": \"%d\"}",
-                    t.name, datetime, sensors.temperature, sensors.humidity, 
+                    t.name, sensors.temperature, sensors.humidity, 
                     sensors.windDirection, sensors.windIntensity, sensors.rainHeight);
         // xtimer_sleep((uint32_t) 3);
         
