@@ -196,9 +196,9 @@ static int sensors_read(int argc, char **argv){
         //             sensors.windDirection, sensors.windIntensity, sensors.rainHeight);
 
         //Testing: message template:
-        sprintf(message_json, mess_template, t.name, sensor.temperature, sensor.humidity, sensor.windDirection, sensor.windIntensity, sensor.rainHeight)
+        sprintf(message_json, mess_template, t.name, sensors.temperature, sensors.humidity, sensors.windDirection, sensors.windIntensity, sensors.rainHeight);
         //End testing
-        
+
         // xtimer_sleep((uint32_t) 3);
         
         //Try-hard: 
