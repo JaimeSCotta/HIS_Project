@@ -119,7 +119,7 @@ static int sensors_read(int argc, char **argv){
     // sensors struct
     t_sensors sensors;
     //Testing: message template
-    const char mess_template[256] = "{\topicPub\": \"%s\", \"temperature\" : %d, \"humidity\": %d, \"windDirection\": %d, \"windIntensity\" : %d, \"rainHeight\": %d}";
+    const char mess_template[256] = "{\"topicPub\": \"%s\", \"temperature\" : %d, \"humidity\": %d, \"windDirection\": %d, \"windIntensity\" : %d, \"rainHeight\": %d}";
     //End Testing
 
     //Predefined topic: 
