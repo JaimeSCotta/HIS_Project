@@ -111,13 +111,16 @@ void gen_sensors_values(t_sensors* sensors, int position){
 }
 
 // json to be published
-static char json[512];
+static char message_json[512];
 
 static int sensors_read(int argc, char **argv){
     emcute_topic_t t;
     unsigned flags = EMCUTE_QOS_0;
     // sensors struct
     t_sensors sensors;
+    //Testing: message template
+    const char mess_template[256] = "{\topicPub\": \"%s\", \"temperature\" : %d, \"humidity\": %d, \"windDirection\": %d, \"windIntensity\" : %d, \"rainHeight\": %d}";
+    //End Testing
 
     //Predefined topic: 
     char topic_buf[100] = "his_project/his_iot/sensor_data";
@@ -179,25 +182,30 @@ static int sensors_read(int argc, char **argv){
 
         // fills the json document
         //old:
-        // sprintf(json, "{\"topicPub\": \"%s\", \"datetime\": \"%s\", \"temperature\": "
+        // sprintf(message_json, "{\"topicPub\": \"%s\", \"datetime\": \"%s\", \"temperature\": "
         //             "\"%d\", \"humidity\": \"%d\", \"windDirection\": \"%d\", "
         //             "\"windIntensity\": \"%d\", \"rainHeight\": \"%d\"}",
         //             t.name, datetime, sensors.temperature, sensors.humidity, 
         //             sensors.windDirection, sensors.windIntensity, sensors.rainHeight);
 
         //new: -- REMOVED DATETIME
-        sprintf(json, "{\"topicPub\": \"%s\", \"temperature\": "
-                    "\"%d\", \"humidity\": \"%d\", \"windDirection\": \"%d\", "
-                    "\"windIntensity\": \"%d\", \"rainHeight\": \"%d\"}",
-                    t.name, sensors.temperature, sensors.humidity, 
-                    sensors.windDirection, sensors.windIntensity, sensors.rainHeight);
+        // sprintf(message_json, "{\"topicPub\": \"%s\", \"temperature\": "
+        //             "\"%d\", \"humidity\": \"%d\", \"windDirection\": \"%d\", "
+        //             "\"windIntensity\": \"%d\", \"rainHeight\": \"%d\"}",
+        //             t.name, sensors.temperature, sensors.humidity, 
+        //             sensors.windDirection, sensors.windIntensity, sensors.rainHeight);
+
+        //Testing: message template:
+        sprintf(message_json, mess_template, t.name, sensor.temperature, sensor.humidity, sensor.windDirection, sensor.windIntensity, sensor.rainHeight)
+        //End testing
+        
         // xtimer_sleep((uint32_t) 3);
         
         //Try-hard: 
-        printf("Attempt to publish topic: %s and msg:\n %s \n with flag 0x%02x\n", t.name, json, (int)flags);
+        printf("Attempt to publish topic: %s and msg:\n %s \n with flag 0x%02x\n", t.name, message_json, (int)flags);
 
         /*Step 2: Publish data*/
-        if(emcute_pub(&t, json, strlen(json), flags) != EMCUTE_OK){
+        if(emcute_pub(&t, message_json, strlen(message_json), flags) != EMCUTE_OK){
             printf("error: unable to publish data to topic ' %s [%i] '\n",
                                                     t.name, (int)t.id);
             return 1;
