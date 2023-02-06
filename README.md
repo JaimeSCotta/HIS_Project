@@ -69,6 +69,7 @@ int zigZag_val(int x){
 
 ```
 And then generate the value: 
+
 **Note that:** the temperature sensor values go from 0 to 20 increasing by two. The rest of the sensor values follow the same function but with the change of +1 in humidity (values from 1 to 21), -1 in wind direction, +2 in values of wind intensity, and –2 in rain height.
 
 ```c
