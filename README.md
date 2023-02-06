@@ -36,10 +36,7 @@ The aim of the project is to create an application which sends an MQTT-SN messag
 ---
 ## Architecture: 
 ### 1. Overarching idea: 
----
-SENSORS <--> BORDER ROUTER <--> MQTT-SN Gateway <--> EC2 Instance <--> AwS IoT Core (MQTT Broker) <--> AwS IoT Analytics --> AwS S3 Storage --> AwS SageMaker
-___
-
+![architecture img](./img/archi.jpeg)
 - In this project, the following applications from **RIOT** are ultilized: 
     * emcute_mqttsn: MQTT-SN client, which publishes the sensor data and subscribes to the MQTT-SN Gateway.
     * Border Router.
@@ -292,7 +289,7 @@ At this step, the IoT Analytics Pipeline is now set up.
 3. Choose __Create a data set__
 4. Select __Create SQL__
     * **ID**: sensorStreamDataSet
-    * **Select data store source**: sensorStreamDataStore - **this** is the _S3 bucket_ containing the data created in step 1b. 
+    * **Select data store source**: sensorStreamDataStore - **this** is the _S3 bucket_ containing the data
 5. Click **Next**
 6. Keep the default SQL statement, which should read ``SELECT * FROM sensorstreamdatastore`` and click **Next**.
 7. Keep all options as default and click **Next**.
@@ -335,7 +332,9 @@ Now we have a running Notebook to (which is a bit overkill) visualize the sensor
 1. On the same console, click **Actions** -> **View in AwS SageMaker** -> **Open JupyterLab**.
 2. Navigate to **IoTAnalytics** folder on the left.
 3. 1. Click the **sensordatanotebook.ipynb** and paste the code from the *.ipynb in this git repo, or.
-   2. Upload the *.ipynb in this git repo onto the SageMaker directory, and runs all the cell to see the visualization! 
+   2. Upload the *.ipynb in this git repo onto the SageMaker directory, and runs all the cell to see the visualization!
+    
+![visualization img](./img/visualizationPlot.png)
 ___
 # Contribution: 
 | Task/Function                                                   | Responsible                         |
