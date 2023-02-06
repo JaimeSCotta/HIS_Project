@@ -69,6 +69,8 @@ int zigZag_val(int x){
 
 ```
 And then generate the value: 
+**Note that:** the temperature sensor values go from 0 to 20 increasing by two. The rest of the sensor values follow the same function but with the change of +1 in humidity (values from 1 to 21), -1 in wind direction, +2 in values of wind intensity, and –2 in rain height.
+
 ```c
 /* generate Zig Zag pattern */
 void gen_sensors_values(t_sensors* sensors, int position){
@@ -105,7 +107,7 @@ static int sensors_read(int argc, char **argv){
 ```
 ___
 ## EC2 Instance & AwS IoT Core Setup:
-Multiple online sources provided ways to set up the EC2 instance and AwS IoT Core. One among which is a great [article]("https://aws.amazon.com/blogs/iot/how-to-bridge-mosquitto-mqtt-broker-to-aws-iot/" "How to Bridge Mosquitto MQTT Broker to AWS IoT") from AwS themselves to setup Brokers on both EC2 and AwS IoT Core. 
+Multiple online sources provided ways to set up the EC2 instance and AwS IoT Core. One among which is this great [article]("https://aws.amazon.com/blogs/iot/how-to-bridge-mosquitto-mqtt-broker-to-aws-iot" "How to Bridge Mosquitto MQTT Broker to AWS IoT") from AwS themselves to setup Brokers on both EC2 and AwS IoT Core. 
 
 Fortunately, although our accounts are not allowed to use IAM servce, we managed to bypass that by simply creating an EC2 instance as the tutorial instructed, and manually create an AwS IoT Core's Thing and attach policy to it. Then, follow the steps on the article above to setup the brokers.
 
@@ -202,7 +204,7 @@ BrokerSecurePortNo=8883
 ...
 # UDP6
 GatewayUDP6Bind= <Paste the Node IPv6 Address Here> 
-GatewayUDP6Port=1888 # Can also be any port you wants
+GatewayUDP6Port=1888 # Can also be any port you want
 GatewayUDP6Broadcast=FF02::1
 GatewayUDP6If=wpan0
 GatewayUDP6Hops=1
@@ -312,7 +314,7 @@ At this step, the IoT Analytics Pipeline is now set up.
     * **IAM Role**: LabRole
 5. Review the rule, and click **Create rule**. 
 
-At this point, the every messages received will be routed to IoT Analytics and save to the created S3 buckets. 
+At this point, the every received messages will be routed to IoT Analytics and save to the created S3 buckets. 
 ___
 ## AwS SageMaker:
 ### 1. On AwS IoT Analytics:
@@ -333,7 +335,7 @@ Now we have a running Notebook to (which is a bit overkill) visualize the sensor
 2. Navigate to **IoTAnalytics** folder on the left.
 3. 1. Click the **sensordatanotebook.ipynb** and paste the code from the *.ipynb in this git repo, or.
    2. Upload the *.ipynb in this git repo onto the SageMaker directory, and runs all the cell to see the visualization!
-    
+
 ![visualization img](./img/visualizationPlot.png)
 ___
 # Contribution: 
