@@ -115,7 +115,7 @@ static char message_json[512];
 
 static int sensors_read(int argc, char **argv){
     emcute_topic_t t;
-    unsigned flags = EMCUTE_QOS_0;
+    unsigned flags = EMCUTE_QOS_1;
     // sensors struct
     t_sensors sensors;
     //Testing: message template
@@ -132,7 +132,7 @@ static int sensors_read(int argc, char **argv){
         return 1;
     }
 
-    //If other topic is specified, then use that topic:
+    //If another topic is specified, then use that topic:
     if (argc == 4){
         topic = argv[3];
     }
@@ -150,18 +150,7 @@ static int sensors_read(int argc, char **argv){
         gw.port = atoi(argv[2]);
     }
     
-    while(1){
-        // takes the current date and time -- TEMPORARY REMOVED
-        // char datetime[20];
-        // time_t now;
-        // time(&now);
-        // struct tm* timeinfo = localtime(&now);
-        // int c = strftime(datetime, sizeof(datetime), "%Y-%m-%d %T", timeinfo);
-        // if(c == 0) {
-        //     printf("Error! Invalid format\n");
-        //     return 0;
-        // }
-        
+    while(1){       
         // Establish the connection: 
         if(emcute_con(&gw, true, NULL, NULL, 0, 0) != EMCUTE_OK){
             printf("error: unable to connect to [%s]:%i\n", argv[1], (int)gw.port);
@@ -179,21 +168,6 @@ static int sensors_read(int argc, char **argv){
         gen_sensors_values(&sensors, posRead);
         posRead++;
         if(posRead==41) posRead =0;
-
-        // fills the json document
-        //old:
-        // sprintf(message_json, "{\"topicPub\": \"%s\", \"datetime\": \"%s\", \"temperature\": "
-        //             "\"%d\", \"humidity\": \"%d\", \"windDirection\": \"%d\", "
-        //             "\"windIntensity\": \"%d\", \"rainHeight\": \"%d\"}",
-        //             t.name, datetime, sensors.temperature, sensors.humidity, 
-        //             sensors.windDirection, sensors.windIntensity, sensors.rainHeight);
-
-        //new: -- REMOVED DATETIME
-        // sprintf(message_json, "{\"topicPub\": \"%s\", \"temperature\": "
-        //             "\"%d\", \"humidity\": \"%d\", \"windDirection\": \"%d\", "
-        //             "\"windIntensity\": \"%d\", \"rainHeight\": \"%d\"}",
-        //             t.name, sensors.temperature, sensors.humidity, 
-        //             sensors.windDirection, sensors.windIntensity, sensors.rainHeight);
 
         //Testing: message template:
         sprintf(message_json, mess_template, t.name, sensors.temperature, sensors.humidity, sensors.windDirection, sensors.windIntensity, sensors.rainHeight);
