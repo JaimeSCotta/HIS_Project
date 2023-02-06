@@ -258,7 +258,7 @@ On the *bucketName-*__datastore__, Appropriate permission for IoT Analytics to a
 4. Click **Save**
 ___
 ## AwS IoT Analytics:
-### IoT Analytics Channel
+### 1. IoT Analytics Channel
 Next, we will create the IoT Analytics channel that will consume data received at the IoT Core Broker and store it into S3 bucket. 
 1. Navigate to __AwS IoT Analytics__ console
 2. Navigate to __Channels__
@@ -267,7 +267,7 @@ Next, we will create the IoT Analytics channel that will consume data received a
     * **Choose the storage type**: Customer Managed S3 Bucket, and choose the S3 channel bucket created in the previous step (see: [create S3 buckets](#aws-s3))
     * **IAM Role**: Because of our subscription, choose _Lab Role_
 4. Click __Next__ and leave everything blank. Then click __Create Channel__
-### IoT Analytics Data Store for the pipeline
+### 2. IoT Analytics Data Store for the pipeline
 1. Navigate to __AwS IoT Analytics__ console
 2. Navigate to __Data stores__
 3. __Create__: 
@@ -275,7 +275,7 @@ Next, we will create the IoT Analytics channel that will consume data received a
     * **Choose the Storage Type**: Customer Managed S3 Bucket -> choose the S3 data store bucket.
     * **IAM ROLE**: Choose _Lab Role_
 4. Click __Next__ and __Create data store__
-### IoT Analytics Pipeline
+### 3. IoT Analytics Pipeline
 1. Navigate to __AwS IoT Analytics__ console
 2. Navigate to __Pipelines__
 3. __Create__:
@@ -286,7 +286,7 @@ Next, we will create the IoT Analytics channel that will consume data received a
 6. Click __Create Pipeline__
 
 At this step, the IoT Analytics Pipeline is now set up.  
-### IoT Analytics Data Set
+### 4. IoT Analytics Data Set
 1. Navigate to __AwS IoT Analytics__ console
 2. Navigate to __Data sets__
 3. Choose __Create a data set__
@@ -295,14 +295,15 @@ At this step, the IoT Analytics Pipeline is now set up.
     * **Select data store source**: sensorStreamDataStore - **this** is the _S3 bucket_ containing the data created in step 1b. 
 5. Click **Next**
 6. Keep the default SQL statement, which should read ``SELECT * FROM sensorstreamdatastore`` and click **Next**.
-7. Keep all options as default and click **Next** until reaching 'Configure the delivery rules of your analytics results'. 
-8. Click **Add rule**
-9. Choose __Deliver result to S3__
+7. Keep all options as default and click **Next**.
+8. At **Set query schedule**, choose the **Frequency**: Every 1 minute. This will query to run regularly to refresh the dataset. click **Next** until reaching the "Configure dataset content relivery rules".
+9. Click **Add rule**
+10. Choose __Deliver result to S3__
     * **S3 buket**: select the S3 bucket that ends with '-dataset'. 
     * **Bucket key expression**: output.csv
     * **IAM Role**: LabRole 
-10. Click **Create data set** to finalize the creation of data set.
-### Create Message Routing Rule from IoT Core to IoT Analytics
+11. Click **Create data set** to finalize the creation of data set.
+### 5. Create Message Routing Rule from IoT Core to IoT Analytics
 1. Navigate to __AwS IoT Core__ console
 2. Navigate to __Message routing__
 3. Navigate to __Rules__
@@ -314,9 +315,10 @@ At this step, the IoT Analytics Pipeline is now set up.
     * **IAM Role**: LabRole
 5. Review the rule, and click **Create rule**. 
 
-At this point, the every messages received will be routed to IoT Analytics and save to the created S3 buckets. Wait until the notebook instance status goes from *Pending* to **inService*, then we are good to go. 
+At this point, the every messages received will be routed to IoT Analytics and save to the created S3 buckets. 
 ___
 ## AwS SageMaker:
+### 1. On AwS IoT Analytics:
 1. Navigate to __AwS IoT Analytics__ console
 2. Navigate to __Notebooks__
 3. Click __Create Notebook__
@@ -327,15 +329,21 @@ ___
     * **Select a notebook instance**: We don't have that yet, therefore, click the *Create new instance* drop down menu, give it the *instance name, instance type, and Role name*(again, **LabRole) and click *Create new instance*. Once a new instance is running, simply choose that instance. 
 6. Click **Next** to review, then click **Create notebook**.
 
-Now we have a running Notebook to (which is a bit overkill) visualize the sensor data. 
+Now we have a running Notebook to (which is a bit overkill) visualize the sensor data. Wait until the notebook instance status goes from *Pending* to **in service**, then we are good to go. 
 
+### 2. In the Notebook: 
+1. On the same console, click **Actions** -> **View in AwS SageMaker** -> **Open JupyterLab**.
+2. Navigate to **IoTAnalytics** folder on the left.
+3. 1. Click the **sensordatanotebook.ipynb** and paste the code from the *.ipynb in this git repo, or.
+   2. Upload the *.ipynb in this git repo onto the SageMaker directory, and runs all the cell to see the visualization! 
+___
 # Contribution: 
 | Task/Function                                                   | Responsible                         |
 | ----------------------------------------------------------------| ------------------------------------|
 | Sensor's ZigZag function                                        | Jaime Sanchez Cotta                 |
 | Sensor's Publish function                                       | Phuc Hoc Tran + Jaime Sanchez Cotta |
 | AwS EC2 and Mosquitto Broker Setup                              | Phuc Hoc Tran                       |
-| AwS IoT Core, Message routing Rule Setup and Mosquitto Bridge   | Phuc Hoc Tran                       |
+| AwS IoT Core, Message Routing Rule Setup and Mosquitto Bridge   | Phuc Hoc Tran                       |
 | Paho's MQTT-SN Gateway Setup                                    | Phuc Hoc Tran                       |
 | AwS IoT Analytics Setup                                         | Phuc Hoc Tran                       |
 | AwS S3 Buckets Setup                                            | Phuc Hoc Tran                       |
