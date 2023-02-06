@@ -1,11 +1,11 @@
-# HIS_Project: From Microcontroller to the Cloud
-High integrity Sistems' Project. Frankfurt University of Applied Sciences.
+# HIS_Project: IoT - From Microcontroller to the Cloud
+High integrity Systems' Project - Frankfurt University of Applied Sciences.
 
 Co-authors: 
 - Phuc Hoc Tran - 1235133 
 - Jaime Sanchez Cotta - 1430488
 
-This Markdown is written by Phuc Hoc Tran (1235133)
+This Markdown file is written by Phuc Hoc Tran (1235133)
 
 The aim of the project is to create an application which sends an MQTT-SN message with artificial sensor's measurement (client is deployed on FiT/IoT-Lab) as its content to AwS cloud (in this project, we used AwS IoT Core) and visualize the measurement on AwS SageMaker.
 
@@ -214,7 +214,7 @@ GatewayUDP6Hops=1
 Afterwards, build the Gateway and run as instructed above (Whilst ssh in the node).
 ___
 ## AwS S3:
-Before moving on to setup the IoT Analytics, we first need to create 3 S3 buckets, one for IoT Analytics __channel__, one for the __data store__, and one for the data __data set__. The following are steps to recreate:
+Before moving on to setup the IoT Analytics, we first need to create 3 S3 buckets, one for IoT Analytics __channel__, one for the __data store__, and one for the __data set__. The following are steps to recreate:
 1. Navigate to the __S3 Management Console__
 2. Choose __Create Bucket__
     * **Bucket name**: Give the bucket a unique name (must be globally unqiue) and append it with '-channel'. 
@@ -258,9 +258,76 @@ On the *bucketName-*__datastore__, Appropriate permission for IoT Analytics to a
 4. Click **Save**
 ___
 ## AwS IoT Analytics:
+### IoT Analytics Channel
+Next, we will create the IoT Analytics channel that will consume data received at the IoT Core Broker and store it into S3 bucket. 
+1. Navigate to __AwS IoT Analytics__ console
+2. Navigate to __Channels__
+3. Create a new channel
+    * **ID**: sensorStreamDataChannel
+    * **Choose the storage type**: Customer Managed S3 Bucket, and choose the S3 channel bucket created in the previous step (see: [create S3 buckets](#aws-s3))
+    * **IAM Role**: Because of our subscription, choose _Lab Role_
+4. Click __Next__ and leave everything blank. Then click __Create Channel__
+### IoT Analytics Data Store for the pipeline
+1. Navigate to __AwS IoT Analytics__ console
+2. Navigate to __Data stores__
+3. __Create__: 
+    * **ID**: sensorStreamDataStore
+    * **Choose the Storage Type**: Customer Managed S3 Bucket -> choose the S3 data store bucket.
+    * **IAM ROLE**: Choose _Lab Role_
+4. Click __Next__ and __Create data store__
+### IoT Analytics Pipeline
+1. Navigate to __AwS IoT Analytics__ console
+2. Navigate to __Pipelines__
+3. __Create__:
+    * **ID**: sensorStreamDataPipeline
+    * **Pipeline source**: sensorStreamDataChannel
+4. Click **Next**
+5. **Pipeline Output**: click 'Edit' and choose 'sensorDataStreamStore'
+6. Click __Create Pipeline__
 
+At this step, the IoT Analytics Pipeline is now set up.  
+### IoT Analytics Data Set
+1. Navigate to __AwS IoT Analytics__ console
+2. Navigate to __Data sets__
+3. Choose __Create a data set__
+4. Select __Create SQL__
+    * **ID**: sensorStreamDataSet
+    * **Select data store source**: sensorStreamDataStore - **this** is the _S3 bucket_ containing the data created in step 1b. 
+5. Click **Next**
+6. Keep the default SQL statement, which should read ``SELECT * FROM sensorstreamdatastore`` and click **Next**.
+7. Keep all options as default and click **Next** until reaching 'Configure the delivery rules of your analytics results'. 
+8. Click **Add rule**
+9. Choose __Deliver result to S3__
+    * **S3 buket**: select the S3 bucket that ends with '-dataset'. 
+    * **Bucket key expression**: output.csv
+    * **IAM Role**: LabRole 
+10. Click **Create data set** to finalize the creation of data set.
+### Create Message Routing Rule from IoT Core to IoT Analytics
+1. Navigate to __AwS IoT Core__ console
+2. Navigate to __Message routing__
+3. Navigate to __Rules__
+4. Click __Create rule__
+    * **Rule name**: sensorDataStreamRule, then click **Next**
+    * **SQL Statement**: ``SELECT temperature, humidity, windDirection, windIntensity, rainHeight, timestamp() as time FROM 'his_project/his_iot/sensor_data'``, make sure the **SQL version** is 2016-03-23. Afterwards, click **Next**
+    * **Rule actions**: Choose **IoT Analytics** (_Send a message to IoT Analytics_)
+    * **Channel name**: sensorstreamdatachannel
+    * **IAM Role**: LabRole
+5. Review the rule, and click **Create rule**. 
+
+At this point, the every messages received will be routed to IoT Analytics and save to the created S3 buckets. Wait until the notebook instance status goes from *Pending* to **inService*, then we are good to go. 
 ___
 ## AwS SageMaker:
+1. Navigate to __AwS IoT Analytics__ console
+2. Navigate to __Notebooks__
+3. Click __Create Notebook__
+4. At __Select a template__, choose __IoTA blank template__
+5. To setup a notebook: 
+    * **Notebook name**: sensorDataNotebook
+    * **Select dataset source**: sensorstreamdataset
+    * **Select a notebook instance**: We don't have that yet, therefore, click the *Create new instance* drop down menu, give it the *instance name, instance type, and Role name*(again, **LabRole) and click *Create new instance*. Once a new instance is running, simply choose that instance. 
+6. Click **Next** to review, then click **Create notebook**.
+
+Now we have a running Notebook to (which is a bit overkill) visualize the sensor data. 
 
 # Contribution: 
 | Task/Function                                                   | Responsible                         |
@@ -268,7 +335,7 @@ ___
 | Sensor's ZigZag function                                        | Jaime Sanchez Cotta                 |
 | Sensor's Publish function                                       | Phuc Hoc Tran + Jaime Sanchez Cotta |
 | AwS EC2 and Mosquitto Broker Setup                              | Phuc Hoc Tran                       |
-| AwS IoT Core and Message routing Rule Setup and Mosquitto Bridge| Phuc Hoc Tran                       |
+| AwS IoT Core, Message routing Rule Setup and Mosquitto Bridge   | Phuc Hoc Tran                       |
 | Paho's MQTT-SN Gateway Setup                                    | Phuc Hoc Tran                       |
 | AwS IoT Analytics Setup                                         | Phuc Hoc Tran                       |
 | AwS S3 Buckets Setup                                            | Phuc Hoc Tran                       |
