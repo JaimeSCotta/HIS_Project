@@ -72,7 +72,7 @@ typedef struct sensors{
   int rainHeight;
 }t_sensors;
 
-/* function to publish Zig Zag values */
+/* function to create Zig Zag pattern */
 int posRead =0;
 int vMax = 20;
 int arrayAux[41];
@@ -92,7 +92,7 @@ int zigZag_val(int x){
   }
   else return 0;
 }
-
+//generate Zig Zag pattern
 void gen_sensors_values(t_sensors* sensors, int position){
   int x;
   int i = 0;
@@ -110,14 +110,17 @@ void gen_sensors_values(t_sensors* sensors, int position){
   sensors->rainHeight = arrayAux[position]-2;
 }
 
-// json that it will published
-static char json[512];
+// json to be published
+static char message_json[512];
 
 static int sensors_read(int argc, char **argv){
     emcute_topic_t t;
-    unsigned flags = EMCUTE_QOS_0;
+    unsigned flags = EMCUTE_QOS_1;
     // sensors struct
     t_sensors sensors;
+    //Testing: message template
+    const char mess_template[256] = "{\"topicPub\": \"%s\", \"temperature\" : %d, \"humidity\": %d, \"windDirection\": %d, \"windIntensity\" : %d, \"rainHeight\": %d}";
+    //End Testing
 
     //Predefined topic: 
     char topic_buf[100] = "his_project/his_iot/sensor_data";
@@ -129,7 +132,7 @@ static int sensors_read(int argc, char **argv){
         return 1;
     }
 
-    //If other topic is specified, then use that topic:
+    //If another topic is specified, then use that topic:
     if (argc == 4){
         topic = argv[3];
     }
@@ -147,18 +150,7 @@ static int sensors_read(int argc, char **argv){
         gw.port = atoi(argv[2]);
     }
     
-    while(1){
-        // takes the current date and time
-        char datetime[20];
-        time_t current;
-        time(&current);
-        struct tm* timeT = localtime(&current);
-        int c = strftime(datetime, sizeof(datetime), "%Y-%m-%d %T", timeT);
-        if(c == 0) {
-        printf("Error! Invalid format\n");
-            return 0;
-        }
-        
+    while(1){       
         // Establish the connection: 
         if(emcute_con(&gw, true, NULL, NULL, 0, 0) != EMCUTE_OK){
             printf("error: unable to connect to [%s]:%i\n", argv[1], (int)gw.port);
@@ -177,19 +169,17 @@ static int sensors_read(int argc, char **argv){
         posRead++;
         if(posRead==41) posRead =0;
 
-        // fills the json document
-        sprintf(json, "{\"topicPub\": \"%s\", \"datetime\": \"%s\", \"temperature\": "
-                    "\"%d\", \"humidity\": \"%d\", \"windDirection\": \"%d\", "
-                    "\"windIntensity\": \"%d\", \"rainHeight\": \"%d\"}",
-                    t.name, datetime, sensors.temperature, sensors.humidity, 
-                    sensors.windDirection, sensors.windIntensity, sensors.rainHeight);
-        xtimer_sleep((uint32_t) 3);
+        //Testing: message template:
+        sprintf(message_json, mess_template, t.name, sensors.temperature, sensors.humidity, sensors.windDirection, sensors.windIntensity, sensors.rainHeight);
+        //End testing
+
+        // xtimer_sleep((uint32_t) 3);
         
         //Try-hard: 
-        printf("Attempt to publish topic: %s and msg:\n %s \n with flag 0x%02x\n", t.name, json, (int)flags);
+        printf("Attempt to publish topic: %s and msg:\n %s \n with flag 0x%02x\n", t.name, message_json, (int)flags);
 
         /*Step 2: Publish data*/
-        if(emcute_pub(&t, json, strlen(json), flags) != EMCUTE_OK){
+        if(emcute_pub(&t, message_json, strlen(message_json), flags) != EMCUTE_OK){
             printf("error: unable to publish data to topic ' %s [%i] '\n",
                                                     t.name, (int)t.id);
             return 1;
